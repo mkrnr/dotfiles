@@ -1,3 +1,7 @@
 /*
 !.gitignore
-!/.i3/
+!.i3/
+
+!.config/
+.config/*
+!.config/scripts/

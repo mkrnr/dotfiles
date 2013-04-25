@@ -1,7 +1,7 @@
 # This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
 # More information: http://creativecommons.org/licenses/by-sa/3.0/
 #
-# Author: Martin Koerner (http://mkoerner.de/)
+# Author: Martin Koerner <http://mkoerner.de/>
 #
 # Thanks to: Onse
 
@@ -230,5 +230,6 @@ tray_output primary
 }
 # decoration colors
 #client.focused_inactive #42717B #42717B #151515 #6D878D
-client.unfocused #404040 #404040 #101010 #101010
-client.focused #7DC1CF #7DC1CF #151515 #4E9FB1
+client.unfocused  #404040 #151515 #5f5f5f #101010
+client.focused  #4E9FB1 #7DC1CF #151515 #4E9FB1
+client.urgent  #D23D3D #E84F4F #DDDDDD
