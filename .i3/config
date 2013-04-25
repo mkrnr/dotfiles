@@ -1,0 +1,234 @@
+# This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+# More information: http://creativecommons.org/licenses/by-sa/3.0/
+#
+# Author: Martin Koerner (http://mkoerner.de/)
+#
+# Thanks to: Onse
+
+
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# startup
+#exec --no-startup-id skype
+exec --no-startup-id pidgin
+exec --no-startup-id fbsetroot -solid lightblue4
+exec --no-startup-id ~/.dropbox-dist/dropboxd
+exec --no-startup-id xrandr --output LVDS1 --mode 1366x768 --pos 0x312 --output HDMI2 --auto --pos 1366x0 --primary
+
+set $mod Mod4
+
+#font for window titles. ISO 10646 = Unicode
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+# add or remove laptop display
+bindsym $mod+plus exec xrandr --output LVDS1 --mode 1366x768 --pos 0x312 --output HDMI2 --auto --pos 1366x0 --primary
+bindsym $mod+minus exec xrandr --output LVDS1 --off --output HDMI2 --auto --primary
+bindsym $mod+m exec xrandr --output LVDS1 --mode 1366x768 --primary --output HDMI2 --off
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+Q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+odiaeresis focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+J move left
+bindsym $mod+Shift+K move down
+bindsym $mod+Shift+L move up
+bindsym $mod+Shift+Odiaeresis move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, default)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout default
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindcode $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+exclam move container to workspace 1
+bindsym $mod+Shift+quotedbl move container to workspace 2
+bindsym $mod+Shift+section move container to workspace 3
+bindsym $mod+Shift+dollar move container to workspace 4
+bindsym $mod+Shift+percent move container to workspace 5
+bindsym $mod+Shift+ampersand move container to workspace 6
+bindsym $mod+Shift+slash move container to workspace 7
+bindsym $mod+Shift+parenleft move container to workspace 8
+bindsym $mod+Shift+parenright move container to workspace 9
+bindsym $mod+Shift+equal move container to workspace 10
+
+# remove borders adjacent to the screen edges
+#hide_edge_borders both
+# popup in fullscreen if from same application
+#popup_during_fullscreen smart
+# get back to former workspace
+#workspace_auto_back_and_forth yes
+# move workspaces
+bindsym $mod+ctrl+j move container to output left
+bindsym $mod+ctrl+odiaeresis move container to output right
+bindsym $mod+ctrl+Left move container to output left
+bindsym $mod+ctrl+Right move container to output right
+
+bindsym $mod+ctrl+Shift+j move workspace to output left
+bindsym $mod+ctrl+Shift+odiaeresis move workspace to output right
+bindsym $mod+ctrl+Shift+Left move workspace to output left
+bindsym $mod+ctrl+Shift+Right move workspace to output right
+
+# scratchpad
+bindsym $mod+p move scratchpad
+bindsym $mod+o scratchpad show
+
+
+# reload the configuration file
+bindsym $mod+Shift+C reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+R restart
+# exit i3 (logs you out of your X session)
+bindsym Mod1+ctrl+Delete exit
+# shutdown
+bindsym Mod1+ctrl+End exec dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym odiaeresis resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym 113 resize shrink width 10 px or 10 ppt
+        bindsym 116 resize grow height 10 px or 10 ppt
+        bindsym 111 resize shrink height 10 px or 10 ppt
+        bindsym 114 resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bindsym $mod+c exec i3-sensible-terminal -e vim ~/.i3/config
+
+# volume control
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ && play /usr/share/sounds/ubuntu/stereo/message.ogg
+bindsym XF86AudioLowerVolume exec amixer set Master 5%- && play /usr/share/sounds/ubuntu/stereo/message.ogg
+bindsym XF86AudioMute exec $HOME/.i3/scripts/mute.sh && play /usr/share/sounds/ubuntu/stereo/message.ogg
+
+# update
+bindsym $mod+u exec i3-sensible-terminal -e sudo apt-get update
+bindsym $mod+Shift+u exec i3-sensible-terminal -e sudo apt-get dist-upgrade
+# adjustable borders
+bindsym $mod+t border normal
+bindsym $mod+z border 1pixel
+bindsym $mod+g border none
+# no borders by default
+new_window 1pixel
+
+# get back to former workspace
+#workspace_auto_back_and_forth yes
+
+#switch between the current and the previously focused one
+bindsym $mod+n workspace back_and_forth
+
+# fluxbox launch combinations
+bindsym Mod1+1 exec nautilus
+bindsym Mod1+2 exec google-chrome
+bindsym Mod1+3 exec eclipse
+bindsym Mod1+4 exec audacious
+bindsym Mod1+5 exec pidgin
+
+#bindsym Mod1+ctrl+3 exec spotify-gnome
+#bindsym ctrl+4 exec scratch-text-editor
+#bindsym Mod1+4 exec sublime-text-2
+#bindsym ctrl+5 exec thunderbird
+#bindsym Mod1+7 exec skypetab-ng
+
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+  status_command $HOME/.i3/conkyJSON.sh
+# status_command i3status --config ~/.i3/i3status.conf
+#  position top
+# mode hide
+
+# show tray icons on the primary monitor
+tray_output primary
+
+  colors {
+  background #151515
+# statusline #605c5a
+# focused_workspace #101010 #101010 #b72f62
+# active_workspace #5f5f5f #101010 #101010
+  focused_workspace #4E9FB1 #7DC1CF #151515
+  inactive_workspace #151515 #151515 #5f5f5f
+  urgent_workspace #D23D3D #E84F4F #DDDDDD
+  }
+}
+# decoration colors
+#client.focused_inactive #42717B #42717B #151515 #6D878D
+client.unfocused #404040 #404040 #101010 #101010
+client.focused #7DC1CF #7DC1CF #151515 #4E9FB1

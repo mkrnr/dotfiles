@@ -1,0 +1,120 @@
+## Configuration start
+
+# no X output
+out_to_x no
+# don't create own window
+own_window no
+# print to console
+out_to_console yes
+# shorten units
+short_units yes
+update_interval 1.0
+total_run_times 0
+background no
+double_buffer yes
+default_bar_size 50 5
+default_gauge_size 20 20
+imlib_cache_size 0
+draw_shades no
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+override_utf8_locale yes
+# font
+#use_xft yes
+#xftfont DejaVu Sans:size=8
+
+## Configuration end
+TEXT
+
+# i3bar JSON
+[
+  ${if_match "${exec xset q | grep LED | rev | cut -c 1}"=="1"}
+    {
+      "full_text": " CAPS LOCK!!!!!11111 ",
+        "color":"\#E84F4F"
+    },
+  ${endif}
+
+  {
+    "full_text": "${freq_g}GHz ${acpitemp}℃",
+    "min_width": 90,
+    "align": "center",
+    "color":
+      ${if_match ${acpitemp}>65}
+        "\#E84F4F"
+      ${else}
+        "\#4E9FB1"
+      ${endif}
+  },
+
+  {
+    "full_text": "≣ ${memperc}% ↔ ${swapperc}%",
+    "min_width": 85,
+    "align": "center",
+    "color":
+      ${if_match ${memperc}>85}
+        "\#E84F4F"
+      ${else}
+        ${if_match ${swapperc}>0}
+          "\#E84F4F"
+        ${else}
+          "\#4E9FB1"
+        ${endif}
+      ${endif}
+  },
+
+  {
+    "full_text": "☼ ${uptime_short}",
+    "min_width": 70,
+    "align": "center",
+    "color": "\#4E9FB1"
+  },
+
+  {
+    "full_text":
+      ${if_existing /proc/net/route wlan0}
+        "≈ ${wireless_essid wlan0}[${wireless_link_qual_perc wlan0}%] ↓ ${downspeed eth0}/s ↑ ${upspeed eth0}/s"
+      ${else}
+        "↓ ${downspeed eth0}/s ↑ ${upspeed eth0}/s"
+      ${endif},
+    "min_width":
+      ${if_existing /proc/net/route wlan0}
+        270
+      ${else}
+        140
+      ${endif},
+    "align": "center",
+    "color": "\#4E9FB1"
+  },
+
+  {
+    "full_text": "♪ ${exec ~/.i3/scripts/conkyMute.sh}",
+    "min_width": 55,
+    "align": "center",
+    "color": "\#4E9FB1"
+  },
+
+  {
+    "full_text": "ϟ ${battery_percent BAT0}%",
+    "min_width": 45,
+    "align": "center",
+    "color":
+     # ${if_match ${battery_percent BAT0}>=95}
+     #   "\#77BA79"
+     # ${else}
+        ${if_match ${battery_percent BAT0}>=25}
+          "\#4E9FB1"
+        ${else}
+          "\#E84F4F"
+        ${endif}
+     # ${endif}
+  },
+
+  {
+    "full_text": "${time %a, %d. %b %k:%M}",
+    "min_width": 130,
+    "align": "center",
+    "color": "\#4E9FB1"
+  }
+],
