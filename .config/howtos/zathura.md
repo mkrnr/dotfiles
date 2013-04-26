@@ -26,3 +26,10 @@ This HowTo describes the Zathura installation and configurations needed to enabl
 8. Download, extract, and install the Poppler plugin for Zathura: <http://pwmt.org/projects/zathura/plugins/zathura-pdf-poppler/>
 
 9. That should be it
+
+##Tested with##
+
+- [girara-0.1.5](http://pwmt.org/projects/girara/download/girara-0.1.5.tar.gz)
+- [zathura-0.2.2](http://pwmt.org/projects/zathura/download/zathura-0.2.2.tar.gz)
+- [poppler-0.22.3](http://poppler.freedesktop.org/poppler-0.22.3.tar.gz)
+- [zathura-pdf-poppler-0.2.2](http://pwmt.org/projects/zathura/plugins/download/zathura-pdf-poppler-0.2.2.tar.gz)
