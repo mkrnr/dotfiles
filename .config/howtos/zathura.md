@@ -8,7 +8,7 @@ This HowTo describes the Zathura installation and configurations needed to enabl
 
 2. Download and extract Zathura: <http://pwmt.org/projects/zathura/download/>
 
-3. cd into zathura-x.x.x and patch [zathuraGerNavigation.patch](zathuraGerNavigation.patch) to modify the navigation (this has to be done because of the odiaeresis):
+3. cd into zathura-x.x.x and patch [zathuraGerNavigation.patch](zathuraGerNavigation.patch) to modify the navigation (this has to be done because of the odiaeresis)
 
 
 4. Install Zathura
