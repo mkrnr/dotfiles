@@ -15,7 +15,7 @@ This HowTo describes the Zathura installation and configurations needed to enabl
         @@ -266,10 +266,10 @@
 
         girara_shortcut_add(gsession, 0,                GDK_KEY_r,          NULL, sc_rotate,                   NORMAL,     ROTATE_CW,       NULL);  
-
+        
         -  girara_shortcut_add(gsession, 0,                GDK_KEY_h,          NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);
         -  girara_shortcut_add(gsession, 0,                GDK_KEY_j,          NULL, sc_scroll,                   NORMAL,     DOWN,            NULL);
         -  girara_shortcut_add(gsession, 0,                GDK_KEY_k,          NULL, sc_scroll,                   NORMAL,     UP,              NULL);
@@ -24,9 +24,9 @@ This HowTo describes the Zathura installation and configurations needed to enabl
         +  girara_shortcut_add(gsession, 0,                GDK_KEY_k,          NULL, sc_scroll,                   NORMAL,     DOWN,            NULL);
         +  girara_shortcut_add(gsession, 0,                GDK_KEY_l,          NULL, sc_scroll,                   NORMAL,     UP,              NULL);
         +  girara_shortcut_add(gsession, 0,                GDK_KEY_odiaeresis,          NULL, sc_scroll,                   NORMAL,     RIGHT,           NULL);
-          girara_shortcut_add(gsession, 0,                GDK_KEY_Left,       NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);  
-          girara_shortcut_add(gsession, 0,                GDK_KEY_Up,         NULL, sc_scroll,                   NORMAL,     UP,              NULL);  
-          girara_shortcut_add(gsession, 0,                GDK_KEY_Down,       NULL, sc_scroll,                   NORMAL,     DOWN,            NULL); 
+        girara_shortcut_add(gsession, 0,                GDK_KEY_Left,       NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);  
+        girara_shortcut_add(gsession, 0,                GDK_KEY_Up,         NULL, sc_scroll,                   NORMAL,     UP,              NULL);  
+        girara_shortcut_add(gsession, 0,                GDK_KEY_Down,       NULL, sc_scroll,                   NORMAL,     DOWN,            NULL); 
 
 4. Install Zathura
 
