@@ -194,7 +194,7 @@ new_window 1pixel
 bindsym $mod+n workspace back_and_forth
 
 # fluxbox launch combinations
-bindsym Mod1+1 exec nautilus
+bindsym Mod1+1 exec nautilus -w
 bindsym Mod1+2 exec google-chrome
 bindsym Mod1+3 exec eclipse
 bindsym Mod1+4 exec audacious
