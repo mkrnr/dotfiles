@@ -14,8 +14,8 @@ This HowTo describes the Zathura installation and configurations needed to enabl
         +++ config.c  2013-04-26 19:41:32.189148011 +0200
         @@ -266,10 +266,10 @@
 
-        girara_shortcut_add(gsession, 0,                GDK_KEY_r,          NULL, sc_rotate,                   NORMAL,     ROTATE_CW,       NULL);  
-        
+        girara_shortcut_add(gsession, 0,                GDK_KEY_r,          NULL, sc_rotate,                   NORMAL,     ROTATE_CW,       NULL);
+
         -  girara_shortcut_add(gsession, 0,                GDK_KEY_h,          NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);
         -  girara_shortcut_add(gsession, 0,                GDK_KEY_j,          NULL, sc_scroll,                   NORMAL,     DOWN,            NULL);
         -  girara_shortcut_add(gsession, 0,                GDK_KEY_k,          NULL, sc_scroll,                   NORMAL,     UP,              NULL);
@@ -24,15 +24,15 @@ This HowTo describes the Zathura installation and configurations needed to enabl
         +  girara_shortcut_add(gsession, 0,                GDK_KEY_k,          NULL, sc_scroll,                   NORMAL,     DOWN,            NULL);
         +  girara_shortcut_add(gsession, 0,                GDK_KEY_l,          NULL, sc_scroll,                   NORMAL,     UP,              NULL);
         +  girara_shortcut_add(gsession, 0,                GDK_KEY_odiaeresis,          NULL, sc_scroll,                   NORMAL,     RIGHT,           NULL);
-        girara_shortcut_add(gsession, 0,                GDK_KEY_Left,       NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);  
-        girara_shortcut_add(gsession, 0,                GDK_KEY_Up,         NULL, sc_scroll,                   NORMAL,     UP,              NULL);  
-        girara_shortcut_add(gsession, 0,                GDK_KEY_Down,       NULL, sc_scroll,                   NORMAL,     DOWN,            NULL); 
+        girara_shortcut_add(gsession, 0,                GDK_KEY_Left,       NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);
+        girara_shortcut_add(gsession, 0,                GDK_KEY_Up,         NULL, sc_scroll,                   NORMAL,     UP,              NULL);
+        girara_shortcut_add(gsession, 0,                GDK_KEY_Down,       NULL, sc_scroll,                   NORMAL,     DOWN,            NULL);
 
 4. Install Zathura
 
 5. Download and extract Poppler: <http://poppler.freedesktop.org/>
 
-6. cd into poppler-x.x.x and run the following configuration (Thanks to Onse):
+6. cd into poppler-x.x.x and run the following configuration (Thanks to [Onse](http://goo.gl/Qubl8)):
 
         ./configure --prefix=/usr \
                 --sysconfdir=/etc \
