@@ -8,25 +8,7 @@ This HowTo describes the Zathura installation and configurations needed to enabl
 
 2. Download and extract Zathura: <http://pwmt.org/projects/zathura/download/>
 
-3. cd into zathura-x.x.x and change the following lines in config.c to modify the navigation (this has to be done because of the odiaeresis):
-
-        --- config.c.old  2013-04-26 19:40:50.121149850 +0200
-        +++ config.c  2013-04-26 19:41:32.189148011 +0200
-        @@ -266,10 +266,10 @@
-
-        girara_shortcut_add(gsession, 0,                GDK_KEY_r,          NULL, sc_rotate,                   NORMAL,     ROTATE_CW,       NULL);
-
-        -  girara_shortcut_add(gsession, 0,                GDK_KEY_h,          NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);
-        -  girara_shortcut_add(gsession, 0,                GDK_KEY_j,          NULL, sc_scroll,                   NORMAL,     DOWN,            NULL);
-        -  girara_shortcut_add(gsession, 0,                GDK_KEY_k,          NULL, sc_scroll,                   NORMAL,     UP,              NULL);
-        -  girara_shortcut_add(gsession, 0,                GDK_KEY_l,          NULL, sc_scroll,                   NORMAL,     RIGHT,           NULL);
-        +  girara_shortcut_add(gsession, 0,                GDK_KEY_j,          NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);
-        +  girara_shortcut_add(gsession, 0,                GDK_KEY_k,          NULL, sc_scroll,                   NORMAL,     DOWN,            NULL);
-        +  girara_shortcut_add(gsession, 0,                GDK_KEY_l,          NULL, sc_scroll,                   NORMAL,     UP,              NULL);
-        +  girara_shortcut_add(gsession, 0,                GDK_KEY_odiaeresis,          NULL, sc_scroll,                   NORMAL,     RIGHT,           NULL);
-        girara_shortcut_add(gsession, 0,                GDK_KEY_Left,       NULL, sc_scroll,                   NORMAL,     LEFT,            NULL);
-        girara_shortcut_add(gsession, 0,                GDK_KEY_Up,         NULL, sc_scroll,                   NORMAL,     UP,              NULL);
-        girara_shortcut_add(gsession, 0,                GDK_KEY_Down,       NULL, sc_scroll,                   NORMAL,     DOWN,            NULL);
+3. cd into zathura-x.x.x and patch [zathuraGerNavigation.patch](zathuraGerNavigation.patch) to modify the navigation (this has to be done since ö is not supported in zathurarc)
 
 4. Install Zathura
 
@@ -43,3 +25,10 @@ This HowTo describes the Zathura installation and configurations needed to enabl
 8. Download, extract, and install the Poppler plugin for Zathura: <http://pwmt.org/projects/zathura/plugins/zathura-pdf-poppler/>
 
 9. That should be it
+
+##Tested with##
+
+- [girara-0.1.5](http://pwmt.org/projects/girara/download/girara-0.1.5.tar.gz)
+- [zathura-0.2.2](http://pwmt.org/projects/zathura/download/zathura-0.2.2.tar.gz)
+- [poppler-0.22.3](http://poppler.freedesktop.org/poppler-0.22.3.tar.gz)
+- [zathura-pdf-poppler-0.2.2](http://pwmt.org/projects/zathura/plugins/download/zathura-pdf-poppler-0.2.2.tar.gz)
