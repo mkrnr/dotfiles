@@ -20,7 +20,7 @@ This HowTo describes the Zathura installation and configurations needed to enabl
                 --sysconfdir=/etc \
                 --disable-static  \
                 --enable-xpdf-header
-7. install Poppler
+7. Install Poppler
 
 8. Download, extract, and install the Poppler plugin for Zathura: <http://pwmt.org/projects/zathura/plugins/zathura-pdf-poppler/>
 
