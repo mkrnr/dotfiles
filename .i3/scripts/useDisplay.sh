@@ -5,7 +5,9 @@
 #
 # Author: Martin Koerner <http://mkoerner.de/>
 
-# This script is used in the i3 config
+# This script detects an connected display and configures it via xrandr according the first parameter (notebook, external, or both)
+# It also turns off an unused display
+
 # Usage: ./useDisplay [notebook|external|both] notebookDisplayName notebookResolutionWidth notebookResulutionHeight
 # e.g.: ./useDisplay.sh both LVDS1 1366 768
 
@@ -50,16 +52,15 @@ if [[  -z $extScr ]]; then
   echo "no ext monitor"
   xrandr --output ${nb} --mode ${nbResW}x${nbResH} --pos 0x0 --primary
 else
-  nbPosOffset=`expr $extScrResH - $nbResH`
-  if [[ nbPosOffset -lt 0 ]]; then
-    nbPosOffset=0
-  fi
-
   if [[  $mode == "external" ]]; then
     echo "mode external"
     xrandr --output $nb --off --output ${extScr} --mode ${extScrResW}x${extScrResH} --pos 0x0 --primary
   fi
   if [[  $mode == "both" ]]; then
+    nbPosOffset=`expr $extScrResH - $nbResH`
+    if [[ nbPosOffset -lt 0 ]]; then
+      nbPosOffset=0
+    fi
     echo "mode both"
     xrandr --output ${nb} --mode ${nbResW}x${nbResH} --pos 0x${nbPosOffset} --output ${extScr} --mode ${extScrResW}x${extScrResH} --pos ${nbResW}x0 --primary
   fi
