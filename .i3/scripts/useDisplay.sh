@@ -30,7 +30,7 @@ fi
 # check for connected external display
 IFS="
 "
-extScrArray=(`xrandr --current | grep -A 1 ' connected' | grep -v ${nb}`)
+extScrArray=(`xrandr --current | grep -A 1 ' connected' | grep -v $nb`)
 for ((index=0; index<${#extScrArray[@]}; index++)); do
   if [[ ${extScrArray[$index]} == *connected* ]]; then
     extScr=`echo ${extScrArray[$index]} | awk '{print $1;}'`
@@ -50,11 +50,11 @@ if [[  $mode == "notebook" ]]; then
 fi
 if [[  -z $extScr ]]; then
   echo "no ext monitor"
-  xrandr --output ${nb} --mode ${nbResW}x${nbResH} --pos 0x0 --primary
+  xrandr --output $nb --mode ${nbResW}x$nbResH --pos 0x0 --primary
 else
   if [[  $mode == "external" ]]; then
     echo "mode external"
-    xrandr --output $nb --off --output ${extScr} --mode ${extScrResW}x${extScrResH} --pos 0x0 --primary
+    xrandr --output $nb --off --output $extScr --mode ${extScrResW}x$extScrResH --pos 0x0 --primary
   fi
   if [[  $mode == "both" ]]; then
     nbPosOffset=`expr $extScrResH - $nbResH`
@@ -62,6 +62,6 @@ else
       nbPosOffset=0
     fi
     echo "mode both"
-    xrandr --output ${nb} --mode ${nbResW}x${nbResH} --pos 0x${nbPosOffset} --output ${extScr} --mode ${extScrResW}x${extScrResH} --pos ${nbResW}x0 --primary
+    xrandr --output $nb --mode ${nbResW}x$nbResH --pos 0x$nbPosOffset --output $extScr --mode ${extScrResW}x$extScrResH --pos ${nbResW}x0 --primary
   fi
 fi
