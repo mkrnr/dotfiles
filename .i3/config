@@ -10,22 +10,31 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# system  specific parameters
+# mod key
+set $mod Mod4
+# notebook monitor name (e.g. LVDS1) and resolution check with command xrandr
+set $nbMonitor LVDS1
+# notebook resolution (W=width, h=height)
+set $nbResW 1366
+set $nbResrHW 768
+
+
 # startup
 #exec --no-startup-id skype
 exec --no-startup-id pidgin
 exec --no-startup-id fbsetroot -solid lightblue4
 exec --no-startup-id ~/.dropbox-dist/dropboxd
-exec --no-startup-id xrandr --output LVDS1 --mode 1366x768 --pos 0x312 --output HDMI2 --auto --pos 1366x0 --primary
+exec --no-startup-id $HOME/.i3/scripts/useDisplay.sh both $nbMonitor $nbResW $nbResrHW
 
-set $mod Mod4
 
 #font for window titles. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 # add or remove laptop display
-bindsym $mod+plus exec xrandr --output LVDS1 --mode 1366x768 --pos 0x312 --output HDMI2 --auto --pos 1366x0 --primary
-bindsym $mod+minus exec xrandr --output LVDS1 --off --output HDMI2 --auto --primary
-bindsym $mod+m exec xrandr --output LVDS1 --mode 1366x768 --primary --output HDMI2 --off
+bindsym $mod+comma exec $HOME/.i3/scripts/useDisplay.sh notebook $nbMonitor $nbResW $nbResrHW
+bindsym $mod+period exec $HOME/.i3/scripts/useDisplay.sh both $nbMonitor $nbResW $nbResrHW
+bindsym $mod+minus exec $HOME/.i3/scripts/useDisplay.sh external $nbMonitor $nbResW $nbResrHW
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
