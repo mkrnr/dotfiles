@@ -215,30 +215,46 @@ bindsym Mod1+5 exec pidgin
 #bindsym ctrl+5 exec thunderbird
 #bindsym Mod1+7 exec skypetab-ng
 
+# define colours
+set $C_BACKGROUND #151515
+set $C_LIGHT_BLACK #101010
+set $C_BLACK #404040
+set $C_LIGHT_RED #E84F4F
+set $C_RED #D23D3D
+set $C_LIGHT_GREEN #B8D68C
+set $C_GREEN #A0CF5D
+set $C_LIGHT_YELLOW #E1AA5D
+set $C_YELLOW #F39D21
+set $C_LIGHT_BLUE #7DC1CF
+set $C_BLUE #4E9FB1
+set $C_LIGHT_MAGENTA #9B64FB
+set $C_MAGENTA #8542FF
+set $C_LIGHT_CYAN #6D878D
+set $C_CYAN #42717B
+set $C_WHITE #DDDDDD
+set $C_GREY #5F5F5F
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# i3bar
 bar {
+  tray_output primary
   status_command $HOME/.i3/scripts/conkyJSON.sh
-# status_command i3status --config ~/.i3/i3status.conf
-#  position top
-# mode hide
-
-# show tray icons on the primary monitor
-tray_output primary
-
+#   status_command i3status --config ~/.i3/i3status.conf
+#  position  top
+#   mode hide
   colors {
-  background #151515
-# statusline #605c5a
-# focused_workspace #101010 #101010 #b72f62
-# active_workspace #5f5f5f #101010 #101010
-  focused_workspace #4E9FB1 #7DC1CF #151515
-  inactive_workspace #151515 #151515 #5f5f5f
-  urgent_workspace #D23D3D #E84F4F #DDDDDD
+    background $C_BACKGROUND
+#    statusline $C_YELLOW
+    separator $C_LIGHT_YELLOW
+    active_workspace $C_MAGENTA $C_LIGHT_MAGENTA $C_BACKGROUND
+    focused_workspace  $C_BLUE $C_LIGHT_BLUE $C_BACKGROUND
+    inactive_workspace  $C_BACKGROUND $C_BACKGROUND $C_GREY
+    urgent_workspace  $C_RED $C_LIGHT_RED $C_WHITE
   }
 }
-# decoration colors
-#client.focused_inactive #42717B #42717B #151515 #6D878D
-client.unfocused  #404040 #151515 #5f5f5f #101010
-client.focused  #4E9FB1 #7DC1CF #151515 #4E9FB1
-client.urgent  #D23D3D #E84F4F #DDDDDD
+
+# decoration colours
+client.unfocused  $C_BLACK $C_BACKGROUND $C_GREY $C_LIGHT_BLACK
+client.focused  $C_BLUE $C_LIGHT_BLUE $C_BACKGROUND $C_BLUE
+client.focused_inactive $C_MAGENTA $C_LIGHT_MAGENTA $C_BACKGROUND $C_MAGENTA
+client.urgent  $C_RED $C_LIGHT_RED $C_WHITE
+client.background $C_GREY
