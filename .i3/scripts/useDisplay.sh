@@ -5,8 +5,8 @@
 #
 # Author: Martin Koerner <http://mkoerner.de/>
 
-# This script detects an connected display and configures it via xrandr according the first parameter (notebook, external, or both)
-# It also turns off an unused display
+# This script detects an connected display and configures it via xrandr according the first parameter (notebook, external, or both).
+# It also turns off an unused display.
 
 # Usage: ./useDisplay [notebook|external|both] notebookDisplayName notebookResolutionWidth notebookResulutionHeight
 # e.g.: ./useDisplay.sh both LVDS1 1366 768
