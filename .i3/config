@@ -149,6 +149,8 @@ bindsym $mod+Shift+R restart
 bindsym Mod1+ctrl+Delete exit
 # shutdown
 bindsym Mod1+ctrl+End exec dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop
+# lock screen
+bindsym Mod1+ctrl+l exec gnome-screensaver-command -l
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -212,9 +214,16 @@ bindsym Mod1+5 exec pidgin
 #bindsym ctrl+5 exec thunderbird
 #bindsym Mod1+7 exec skypetab-ng
 
+# take screenshot
+bindsym Print exec scrot '%Y-%m-%d_%H-%M-%S_$wx$h.png' -e 'cp $f ~/images/screenshots/ && mv $f /media/shared/dropbox/Dropbox/public/'
+bindsym Mod1+Print exec i3-sensible-terminal -e scrot -s '%Y-%m-%d_%H-%M-%S_$wx$h.png' -e 'cp $f ~/images/screenshots/ && mv $f /media/shared/dropbox/Dropbox/public/' && sleep 60
+bindsym $mod+Print exec scrot -u '%Y-%m-%d_%H-%M-%S_$wx$h.png' -e 'cp $f ~/images/screenshots/ && mv $f /media/shared/dropbox/Dropbox/public/'
+
+
 # buddy-list width configuration
 for_window [class="(?i)pidgin" window_role="buddy_list"] resize shrink width 0 px or 30 ppt; move right
 for_window [class="(?i)skype" ] resize shrink width 0 px or 30 ppt; move right
+
 
 # define colours
 set $C_BACKGROUND #151515
