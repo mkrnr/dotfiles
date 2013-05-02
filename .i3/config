@@ -213,8 +213,8 @@ bindsym Mod1+5 exec pidgin
 #bindsym Mod1+7 exec skypetab-ng
 
 # buddy-list width configuration
-for_window [class="(?i)pidgin" window_role="buddy_list"] resize shrink width 0 px or 40 ppt; move right
-for_window [class="(?i)skype" ] resize shrink width 0 px or 35:ppt; move right
+for_window [class="(?i)pidgin" window_role="buddy_list"] resize shrink width 0 px or 30 ppt; move right
+for_window [class="(?i)skype" ] resize shrink width 0 px or 30 ppt; move right
 
 # define colours
 set $C_BACKGROUND #151515
