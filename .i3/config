@@ -7,6 +7,25 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# define colours
+set $C_BACKGROUND #151515
+set $C_LIGHT_BLACK #101010
+set $C_BLACK #404040
+set $C_LIGHT_RED #E84F4F
+set $C_RED #D23D3D
+set $C_LIGHT_GREEN #B8D68C
+set $C_GREEN #A0CF5D
+set $C_LIGHT_YELLOW #E1AA5D
+set $C_YELLOW #F39D21
+set $C_LIGHT_BLUE #7DC1CF
+set $C_BLUE #4E9FB1
+set $C_LIGHT_MAGENTA #9B64FB
+set $C_MAGENTA #8542FF
+set $C_LIGHT_CYAN #6D878D
+set $C_CYAN #42717B
+set $C_WHITE #DDDDDD
+set $C_GREY #5F5F5F
+
 # system  specific parameters
 # mod key
 set $mod Mod4
@@ -43,7 +62,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -nb '$C_BLACK' -nf '$C_WHITE' -sb '$C_WHITE' -sf '$C_BLACK'
 
 # change focus
 bindsym $mod+j focus left
@@ -224,25 +243,6 @@ bindsym $mod+Print exec scrot -u '%Y-%m-%d_%H-%M-%S_$wx$h.png' -e 'cp $f ~/image
 for_window [class="(?i)pidgin" window_role="buddy_list"] resize shrink width 0 px or 30 ppt; move right
 for_window [class="(?i)skype" ] resize shrink width 0 px or 30 ppt; move right
 
-
-# define colours
-set $C_BACKGROUND #151515
-set $C_LIGHT_BLACK #101010
-set $C_BLACK #404040
-set $C_LIGHT_RED #E84F4F
-set $C_RED #D23D3D
-set $C_LIGHT_GREEN #B8D68C
-set $C_GREEN #A0CF5D
-set $C_LIGHT_YELLOW #E1AA5D
-set $C_YELLOW #F39D21
-set $C_LIGHT_BLUE #7DC1CF
-set $C_BLUE #4E9FB1
-set $C_LIGHT_MAGENTA #9B64FB
-set $C_MAGENTA #8542FF
-set $C_LIGHT_CYAN #6D878D
-set $C_CYAN #42717B
-set $C_WHITE #DDDDDD
-set $C_GREY #5F5F5F
 
 # i3bar
 bar {
