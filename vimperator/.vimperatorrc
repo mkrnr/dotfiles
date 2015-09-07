@@ -1,0 +1,63 @@
+" scroll faster
+nnoremap j 5j
+nnoremap k 5k
+nnoremap l 5l
+nnoremap h 5h
+
+" change tabs via J/K
+nnoremap J gT
+nnoremap K gt
+
+" hide search bar
+set gui="nonavigation,nobookmarks,nomenu"
+
+colorscheme solarized_dark
+
+" incognito like Chromium
+noremap <C-S-n> i<C-S-p>
+
+" bookmarks
+noremap <C-S-b> :set gui=bookmarks<CR>
+noremap <C-M-b> :set gui=nobookmarks<CR>
+
+" use vim instead of gvim:
+set editor="i3-sensible-terminal -e vim"
+
+" unmap keys that annoy the fuck out of @0nse and me
+nmap <C-q> <nop>
+
+" Hide status bar when fullscreen mode is detected
+" found at: https://github.com/vimperator/vimperator-labs/issues/26#issuecomment-73982996
+autocmd Fullscreen .* js updateBottomBar()
+
+" Re-enable bottom bar during certain commands.
+noremap : :js updateBottomBar(false)<CR>:
+noremap o :js updateBottomBar(false)<CR>o
+noremap O :js updateBottomBar(false)<CR>O
+noremap t :js updateBottomBar(false)<CR>t
+noremap T :js updateBottomBar(false)<CR>t
+noremap / :js updateBottomBar(false)<CR>/
+cnoremap <CR> <CR>:js updateBottomBar()<CR>
+cnoremap <Esc> <Esc>:js updateBottomBar()<CR>
+
+:js << EOF
+
+let hlContentSepValue = highlight.get('ContentSeparator').value
+
+function updateBottomBar(close = window.fullScreen) {
+  let bb = document.getElementById('liberator-bottombar')
+  if (! bb) return
+
+  if (close) {
+    bb.style.height = '0px'
+    bb.style.overflow = 'hidden'
+    liberator.execute('highlight ContentSeparator display: none;')
+  }
+  else {
+    bb.style.height = ''
+    bb.style.overflow = ''
+    liberator.execute('highlight ContentSeparator ' + hlContentSepValue)
+  }
+}
+updateBottomBar()
+

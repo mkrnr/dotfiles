@@ -1,0 +1,5 @@
+map i zoom in
+map o zoom out
+
+set recolor-darkcolor "#839496"
+set recolor-lightcolor "#002b36"

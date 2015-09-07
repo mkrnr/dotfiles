@@ -1,0 +1,20 @@
+# This file automatically written by the Pidgin GTK+ Theme Control plugin.
+# Any changes to this file will be overwritten by the plugin when told to
+# write the settings again.
+# The FAQ (http://developer.pidgin.im/wiki/FAQ) contains some further examples
+# of possible pidgin gtkrc settings.
+gtk-font-name = "Roboto 8"
+style "purplerc_style"
+{
+	GtkIMHtml::hyperlink-color = "#3890EE"
+	GtkIMHtml::hyperlink-visited-color = "#FF5CAA"
+	GtkIMHtml::send-name-color = "#268BD2"
+	GtkIMHtml::receive-name-color = "#DC322F"
+	GtkIMHtml::typing-notification-color = "#859900"
+}
+widget_class "*" style "purplerc_style"
+style "*pidgin_conv_entry_style"
+{
+	font_name = "Source Code Pro 9"
+}
+widget "*pidgin_conv_entry" style "*pidgin_conv_entry_style"

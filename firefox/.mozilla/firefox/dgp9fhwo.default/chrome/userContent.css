@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Helvetica neue';
+  src: local('Roboto Light');
+}
+
+@font-face { /** paypal does this **/
+  font-family: 'Helvetica Neue';
+  src: local('Roboto Light');
+}
+
+@font-face { /** paypal does this **/
+  font-family: 'HelveticaNeue';
+  src: local('Roboto Light');
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: local('Roboto');
+}
+
+@font-face {
+  font-family: 'DejaVu Sans Mono';
+  src: local('Ubuntu Mono');
+}
+
+@font-face {
+  font-family: 'Trebuchet MS';
+  src: local('Roboto');
+}
+
+@font-face {
+  font-family: 'Comic Sans MS';
+  src: local('Comic Neue');
+}
+
+@font-face {
+  font-family: 'Courier';
+  src: local('Source Code Pro');
+}
+

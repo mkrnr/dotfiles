@@ -1,0 +1,15 @@
+! ensure that altgr is loaded:
+keycode 108=ISO_Level3_Shift
+! dots and dash:
+!keycode 60 = period greater period greater ellipsis
+  !keycode 61 = slash question slash question emdash
+! map arrows onto hjkl
+keycode 43 = h H h H Left
+keycode 44 = j J j J Down
+keycode 45 = k K k K Up
+keycode 46 = l L l L Right
+! altgr+f,g and b for accents:
+keycode 41 = f F f F dead_acute
+keycode 42 = g G g G dead_grave
+keycode 56 = b B b B dead_circumflex
+
