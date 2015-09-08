@@ -1,40 +1,53 @@
-@font-face {
-  font-family: 'Helvetica neue';
-  src: local('Roboto Light');
+input {
+  border: 2px inset white;
+  background-color: white;
+  color: black;
+  -moz-appearance: none !important;
 }
 
-@font-face { /** paypal does this **/
-  font-family: 'Helvetica Neue';
-  src: local('Roboto Light');
+textarea {
+  border: 2px inset white;
+  background-color: white;
+  color: black;
+  -moz-appearance: none !important;
 }
 
-@font-face { /** paypal does this **/
-  font-family: 'HelveticaNeue';
-  src: local('Roboto Light');
+select {
+  border: 2px inset white;
+  background-color: white;
+  color: black;
+  -moz-appearance: none !important;
 }
 
-@font-face {
-  font-family: 'Helvetica';
-  src: local('Roboto');
+input[type="radio"],
+input[type="checkbox"] {
+  border: 2px inset white ! important;
+  background-color: white ! important;
+  color: ThreeDFace ! important;
+  -moz-appearance: none !important;
 }
 
-@font-face {
-  font-family: 'DejaVu Sans Mono';
-  src: local('Ubuntu Mono');
+*|*::-moz-radio {
+  background-color: white;
+  -moz-appearance: none !important;
 }
 
-@font-face {
-  font-family: 'Trebuchet MS';
-  src: local('Roboto');
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"] {
+  border: 2px outset white;
+  background-color: #eeeeee;
+  color: black;
+  -moz-appearance: none !important;
 }
 
-@font-face {
-  font-family: 'Comic Sans MS';
-  src: local('Comic Neue');
+body {
+  background-color: white;
+  color: black;
+  display: block;
+  margin: 8px;
+  -moz-appearance: none !important;
 }
 
-@font-face {
-  font-family: 'Courier';
-  src: local('Source Code Pro');
-}
 
