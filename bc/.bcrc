@@ -1,0 +1,6 @@
+scale=6
+
+define log(base,x) {
+  xx=l(x)/l(base)
+  return(xx)
+}
