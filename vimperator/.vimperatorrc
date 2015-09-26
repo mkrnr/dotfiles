@@ -20,6 +20,7 @@ noremap <C-S-n> i<C-S-p>
 noremap <C-S-b> :set gui=bookmarks<CR>
 noremap <C-M-b> :set gui=nobookmarks<CR>
 
+
 " use vim instead of gvim:
 set editor="i3-sensible-terminal -e vim"
 

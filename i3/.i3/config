@@ -41,6 +41,7 @@ set $scripts $HOME/.i3/scripts
 #exec --no-startup-id skype
 #exec --no-startup-id xrandr --output LVDS1 --mode 1366x768 --pos 0x312 --output HDMI2 --mode 1920x1080 --pos 1366x0 --primary
 exec --no-startup-id $scripts/useDisplay.sh notebook $nbMonitor $nbResW $nbResrHW && $scripts/useDisplay.sh both $nbMonitor $nbResW $nbResrHW
+exec --no-startup-id redshift-gtk
 exec --no-startup-id sleep 5 && pidgin
 exec --no-startup-id sleep 5 && dropboxd
 exec --no-startup-id sleep 5 && owncloud
@@ -57,7 +58,8 @@ bindsym Mod1+3 exec eclipse
 bindsym Mod1+4 exec deadbeef
 bindsym Mod1+6 exec thunderbird
 bindsym Mod1+8 exec xchange-viewer
-bindsym Mod1+9 exec spotify-chrome
+#bindsym Mod1+9 exec spotify-chrome
+bindsym Mod1+9 exec spotify
 bindsym Mod1+0 exec pidgin
 
 bindsym $mod+x exec pavucontrol
@@ -330,7 +332,7 @@ bar {
     background          $C_BASE_BROWN_BLACK
     separator           $C_BASE_BLACK
     active_workspace    $C_BLUE  $C_BASE_BROWN_BLACK  $C_BLUE
-    focused_workspace   $C_BLUE  $C_BLUE  $C_BASE_WHITE
+    focused_workspace   $C_BLUE  $C_BLUE  $C_BASE_BROWN_BLACK
     inactive_workspace  $C_BASE_BROWN_BLACK  $C_BASE_BROWN_BLACK  $C_BASE_BROWN_CYAN
     urgent_workspace    $C_RED  $C_RED  $C_BASE_WHITE
   }

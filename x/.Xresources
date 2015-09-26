@@ -73,15 +73,15 @@
 *color15:               S_base3
 
 
-! xterm
-XTerm*utf8: 1
-XTerm*cursorColor: #FFBB333
-XTerm*cursorBlink: false
-
-XTerm*highlightSelection: true
-XTerm*selectToClipoboard: true
-
-XTerm*borderWidth:  0
-! Every shell is a login shell by default (for inclusion of all necessary environment variables)
-XTerm*loginshell: true
-XTerm*savelines: 40960
+!! xterm
+!XTerm*utf8: 1
+!XTerm*cursorColor: #FFBB333
+!XTerm*cursorBlink: false
+!
+!XTerm*highlightSelection: true
+!XTerm*selectToClipoboard: true
+!
+!XTerm*borderWidth:  0
+!! Every shell is a login shell by default (for inclusion of all necessary environment variables)
+!XTerm*loginshell: true
+!XTerm*savelines: 40960
