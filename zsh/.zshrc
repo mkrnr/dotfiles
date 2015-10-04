@@ -5,6 +5,8 @@
 
 # zsh config file
 
+
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -16,9 +18,15 @@ SAVEHIST=5000
 setopt appendhistory autocd extendedglob
 bindkey -v
 
+export TERM='xterm-256color'
+
 export KEYTIMEOUT=1
 
+# Ctrl-R for reverse incremental search
+bindkey "^R" history-incremental-search-backward
+
 zstyle :compinstall filename '/home/martin/.zshrc'
+
 
 autoload -Uz compinit
 compinit
@@ -96,6 +104,20 @@ else
   alias ls='ls -F'
 fi
 
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+#add interactive mode
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+
 # set vim as the default editor
 export VISUAL=vim
 export EDITOR="vim"
@@ -112,11 +134,40 @@ export SCRIPTS_ROOTDIR=/opt/moses/moses-scripts
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-    zle reset-prompt
+
+# vim mode visualization from: https://zeitkraut.de/posts/2014-06-29-howto-zsh-vi-style.html
+setopt prompt_subst
+
+# Set the colors to your liking
+local vi_normal_marker="[%{$fg[green]%}%BN%b%{$reset_color%}]"
+local vi_insert_marker="[%{$fg[cyan]%}%BI%b%{$reset_color%}]"
+local vi_unknown_marker="[%{$fg[red]%}%BU%b%{$reset_color%}]"
+local vi_mode="$vi_insert_marker"
+vi_mode_indicator () {
+  case ${KEYMAP} in
+    (vicmd)      echo $vi_normal_marker ;;
+    (main|viins) echo $vi_insert_marker ;;
+    (*)          echo $vi_unknown_marker ;;
+  esac
 }
 
+# Reset mode-marker and prompt whenever the keymap changes
+function zle-line-init zle-keymap-select {
+  vi_mode="$(vi_mode_indicator)"
+  zle reset-prompt
+}
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+# Multiline-prompts don't quite work with reset-prompt; we work around this by
+# printing the first line(s) via a precmd which is executed before the prompt
+# is printed.  The following can be integrated into PROMPT for single-line
+# prompts.
+#
+# Colorize freely
+#local user_host='%B%n%b@%m'
+#local current_dir='%~'
+#precmd () print -rP "${user_host} ${current_dir}"
+
+local return_code="%(?..[%{$fg[red]%}%?%{$reset_color%}] )"
+PS1='${return_code}%{$fg[green]%}%n@arch%{$reset_color%}${vi_mode}:%{$fg[blue]%}%~%{$reset_color%}%% '
