@@ -12,6 +12,9 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+# for stu
+export MANPATH="$HOME/man:$MANPATH"
+
 HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
@@ -114,9 +117,9 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 #add interactive mode
-alias rm='rm -i'
-alias mv='mv -i'
-alias cp='cp -i'
+#alias rm='rm -i'
+#alias mv='mv -i'
+#alias cp='cp -i'
 
 # set vim as the default editor
 export VISUAL=vim
