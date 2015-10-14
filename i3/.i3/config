@@ -92,7 +92,8 @@ bindsym $mod+Shift+Q kill
 bindsym $mod+Escape exec i3-sensible-terminal -e htop
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb '$C_BASE_BROWN_BLACK' -nf '$C_BASE_BROWN_CYAN' -sb '$C_BASE_BROWN_CYAN' -sf '$C_BASE_BROWN_BLACK'
+
+bindsym $mod+d exec rofi -show run -bgalt '$C_BASE_BLACK'
 
 # change focus
 bindsym $mod+h focus left
