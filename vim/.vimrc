@@ -1,4 +1,3 @@
-" This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
 " More information: http://creativecommons.org/licenses/by-sa/3.0/
 "
 " Authors: Martin Koerner <http://mkoerner.de/> and Onse <http://goo.gl/Qubl8>
@@ -24,9 +23,9 @@ set nu
 syntax enable
 
 " Octave syntax
-augroup filetypedetect
-  au! BufRead,BufNewFile *.m,*.oct set filetype=octave
-augroup END
+"augroup filetypedetect
+"  au! BufRead,BufNewFile *.m,*.oct set filetype=octave
+"augroup END
 
 " highlighted search
 set nohlsearch
@@ -72,7 +71,8 @@ filetype plugin on
 " program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
 " OPTIONAL: This enables automatic indentation as you type.
-filetype indent on
+" TODO: enable indent when problem with markdown indentation (list items get indented too much) is solved
+" filetype indent on
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
@@ -158,7 +158,26 @@ set virtualedit=block
 set background=dark
 colorscheme solarized
 
+" set tab size for markdown files since 4 spaces are needed in markdown lists
+autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
 
 " settings for vim-markdown plugin
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_math=1
+
+
+" settings for vim-pandoc
+
+let g:pandoc#modules#disabled=["folding"]
+
+" disable default mappings to allow \ll to be specified
+let g:pandoc#keyboard#use_default_mappings=0
+
+
+" fix redraw problem of vim when using silent (from:
+" http://vim.wikia.com/wiki/Avoiding_the_"Hit_ENTER_to_continue"_prompts)
+command! -nargs=1 Silent
+\ | execute ':silent !'.<q-args>
+\ | execute ':redraw!'
+
+
