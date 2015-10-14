@@ -4,3 +4,8 @@ define log(base,x) {
   xx=l(x)/l(base)
   return(xx)
 }
+
+define pi(){return(a(1)*4)}         ; pi  = pi()
+                                      e   = e(1)
+define phi(){return((1+sqrt(5))/2)} ; phi = phi()
+define psi(){return((1-sqrt(5))/2)} ; psi = psi()
