@@ -99,6 +99,16 @@ oe () {
   fi
 }
 
+
+# from Jerome Kunegis
+git() {
+    if [ $# -eq 0 ] ; then
+        git log --oneline origin/master..HEAD && git status -s
+    else
+        command git "$@"
+    fi
+}
+
 # ls coloring
 if [[ -x "`whence -p dircolors`" ]]; then
   eval `dircolors`
@@ -154,6 +164,21 @@ vi_mode_indicator () {
   esac
 }
 
+# run vtex from ./vim/bin/vtex
+# open a file using the default editor
+vtex () {
+  if [ -z "$1" ] ; then
+      echo "No argument supplied"
+  else
+    if [ -f $1 ] ; then
+      ~/.vim/bin/vtex $1
+    else
+      echo "'$1' is not a valid file"
+    fi
+  fi
+}
+
+
 # Reset mode-marker and prompt whenever the keymap changes
 function zle-line-init zle-keymap-select {
   vi_mode="$(vi_mode_indicator)"
@@ -174,3 +199,9 @@ zle -N zle-keymap-select
 
 local return_code="%(?..[%{$fg[red]%}%?%{$reset_color%}] )"
 PS1='${return_code}%{$fg[green]%}%n@arch%{$reset_color%}${vi_mode}:%{$fg[blue]%}%~%{$reset_color%}%% '
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+ibus-daemon -drx
+
