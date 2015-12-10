@@ -1,5 +1,8 @@
 setlocal foldlevel=999
 
+nmap <silent> <localleader>k :Silent latexmk -pdf %:t<CR>
+nmap <silent> <localleader>v :Silent o %:t:r.pdf<CR>
+
 " from: http://debdeep777.blogspot.de/2015/01/vim-texlive-vim-latex-suite-zathura-pdf.html
 "
 " Default compiling format
@@ -29,9 +32,9 @@ function! SyncTexForward()
 endfunction
 
 " k=kompile (or kompilieren in German...)
-nmap \k \ll
+"nmap \k \ll
 
-nmap \v \lv
+"nmap \v \lv
 
 " TODO: make this work
 " nmap \f :call SyncTexForward()
