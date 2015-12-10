@@ -4,7 +4,7 @@
 # improved by: Onse <http://goo.gl/Qubl8>
 
 for i in "$@"; do
-    if [ "${i}" = *.tex ]; then
+    if [[ ${i} == *.tex ]]; then
         fileName="${i}";
         # Strip off path and extension, and convert to uppercase.
         # although there is no need to turn into upper case
@@ -13,7 +13,7 @@ for i in "$@"; do
     fi
 done
 
-if [ -z "${serverName}" ]; then
+if [[ -z "${serverName}" ]]; then
         echo 'not a tex file or no non-extension part, no server to create'
 else
         # run in server mode
