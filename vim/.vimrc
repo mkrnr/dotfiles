@@ -22,6 +22,11 @@ set nu
 " syntax highlighting
 syntax enable
 
+" for autocompletion
+set ignorecase
+set infercase
+
+
 " Octave syntax
 "augroup filetypedetect
 "  au! BufRead,BufNewFile *.m,*.oct set filetype=octave
@@ -80,7 +85,7 @@ let g:tex_flavor='latex'
 let g:Tex_CompileRule_dvi = 'latex -interaction=nonstopmode -file-line-error-style $*'
 let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode -file-line-error-style $*'
 let g:Tex_ViewRule_pdf = 'zathura -l error'
-let g:Tex_ViewRule_ps='zathura -l error'
+let g:Tex_ViewRule_ps = 'zathura -l error'
 
 " silent compiling of latex documents
  nmap <Leader>lv :silent call Tex_RunLaTeX()<CR>

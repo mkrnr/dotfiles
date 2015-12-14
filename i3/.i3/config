@@ -38,16 +38,14 @@ set $scripts $HOME/.i3/scripts
 
 
 # startup
-#exec --no-startup-id skype
-#exec --no-startup-id xrandr --output LVDS1 --mode 1366x768 --pos 0x312 --output HDMI2 --mode 1920x1080 --pos 1366x0 --primary
-exec --no-startup-id $scripts/useDisplay.sh notebook $nbMonitor $nbResW $nbResrHW && $scripts/useDisplay.sh both $nbMonitor $nbResW $nbResrHW
+exec --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 0x0 --primary --output LVDS1 --mode 1366x768 --pos 1920x312
 exec --no-startup-id redshift-gtk
-exec --no-startup-id sleep 5 && pidgin
-exec --no-startup-id sleep 5 && dropboxd
-exec --no-startup-id sleep 5 && owncloud
-exec --no-startup-id sleep 5 && thunderbird
-exec --no-startup-id sleep 5 && skype
-exec --no-startup-id sleep 5 && nm-applet
+exec --no-startup-id pidgin
+exec --no-startup-id dropboxd
+exec --no-startup-id owncloud
+exec --no-startup-id thunderbird
+exec --no-startup-id skype
+exec --no-startup-id nm-applet
 
 assign [instance="crx_cnkjkdjlofllcpbemipjbcpfnglbgieh"] 9
 
@@ -56,8 +54,7 @@ bindsym Mod1+1 exec spacefm
 bindsym Mod1+2 exec firefox
 bindsym Mod1+3 exec eclipse
 bindsym Mod1+4 exec deadbeef
-bindsym Mod1+6 exec thunderbird
-bindsym Mod1+8 exec xchange-viewer
+bindsym Mod1+8 exec thunderbird
 #bindsym Mod1+9 exec spotify-chrome
 bindsym Mod1+9 exec spotify
 bindsym Mod1+0 exec pidgin
@@ -131,7 +128,7 @@ bindsym $mod+f fullscreen
 # change container layout (stacked, tabbed, default)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+bindsym $mod+a layout default
 
 
 # toggle tiling / floating
@@ -294,7 +291,6 @@ bindsym $mod+n workspace back_and_forth
 bindsym $mod+Shift+n move container to workspace back_and_forth
 
 
-#bindsym Mod1+ctrl+3 exec spotify-gnome
 #bindsym ctrl+4 exec scratch-text-editor
 #bindsym Mod1+4 exec sublime-text-2
 #bindsym ctrl+5 exec thunderbird

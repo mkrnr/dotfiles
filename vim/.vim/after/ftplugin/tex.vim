@@ -1,6 +1,20 @@
 setlocal foldlevel=999
 
-nmap <silent> <localleader>k :Silent latexmk -pdf %:t<CR>
+
+
+nmap <silent> <localleader>kd :Silent latexmk -pdf -cd %:t <CR>
+nmap <silent> <localleader>km :call LatexmkOnLatexmain()<CR>
+
+"TODO make function applicable also for this case
+"nmap <silent> <localleader>kp :Silent latexmk -pdf -cd ../*.latexmain<CR>
+
+function! LatexmkOnLatexmain()
+  let latexmainFile=system('ls  *.latexmain | tr "\n" " "')
+  "let mainFile=system('${'.latexmainFile.'%.latexmain/}')
+  let mainFile=system("basename ".latexmainFile." .latexmain")
+  let execstr=':Silent latexmk -pdf -cd '.mainFile
+  execute execstr
+endfunction
 
 " from: http://debdeep777.blogspot.de/2015/01/vim-texlive-vim-latex-suite-zathura-pdf.html
 "
@@ -33,8 +47,8 @@ endfunction
 " k=kompile (or kompilieren in German...)
 "nmap \k \ll
 
-nmap \v \lv
+"nmap \v \lv
 
 " TODO: make this work
-" nmap \f :call SyncTexForward()
+nmap \f :call SyncTexForward()<CR>
 
