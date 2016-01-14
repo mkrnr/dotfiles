@@ -69,6 +69,7 @@ command! W w !sudo tee % > /dev/null
 noremap <silent> j gj
 noremap <silent> k gk
 
+
 " LaTeX REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
 filetype plugin on
 " IMPORTANT: grep will sometimes skip displaying the file name if you
@@ -186,3 +187,5 @@ command! -nargs=1 Silent
 \ | execute ':redraw!'
 
 
+" insert real tab with shift+tab
+noremap <S-Tab> <C-V><Tab>

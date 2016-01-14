@@ -1,19 +1,30 @@
 setlocal foldlevel=999
 
-
-
 nmap <silent> <localleader>kd :Silent latexmk -pdf -cd %:t <CR>
 nmap <silent> <localleader>km :call LatexmkOnLatexmain()<CR>
 
-"TODO make function applicable also for this case
-"nmap <silent> <localleader>kp :Silent latexmk -pdf -cd ../*.latexmain<CR>
-
 function! LatexmkOnLatexmain()
-  let latexmainFile=system('ls  *.latexmain | tr "\n" " "')
-  "let mainFile=system('${'.latexmainFile.'%.latexmain/}')
-  let mainFile=system("basename ".latexmainFile." .latexmain")
-  let execstr=':Silent latexmk -pdf -cd '.mainFile
-  execute execstr
+  let latexmainFile=system('ls *.latexmain | tr "\n" " "')
+  if !empty(matchstr(latexmainFile, '.*no matches found.*'))
+    " no matching .latexmain found
+    echo "test"
+    let currentdir=fnamemodify(getcwd(), ':t')
+    " look in parent directory
+    " TODO: search recusively thorugh parents?
+    execute 'cd .. '
+    let latexmainFile=system('ls *.latexmain | tr "\n" " "')
+    echo latexmainFile
+    let mainFile=system("basename ".latexmainFile." .latexmain")
+    let execstr=':Silent latexmk -pdf -cd '.mainFile
+    execute execstr
+    execute 'cd '.currentdir
+  else
+    " matching .latexmain found
+    let mainFile=system("basename ".latexmainFile." .latexmain")
+    let execstr=':Silent latexmk -pdf -cd '.mainFile
+    execute execstr
+  endif
+
 endfunction
 
 " from: http://debdeep777.blogspot.de/2015/01/vim-texlive-vim-latex-suite-zathura-pdf.html
