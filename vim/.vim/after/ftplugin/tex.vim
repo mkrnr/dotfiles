@@ -53,7 +53,6 @@ function! RunZathura()
     " no extra folders
     execute "normal \\lv"
   else
-    let theuniqueserv = expand("%:t:r")
     execute "cd ".folders
     execute system('zathura -x "vim --servername '.theuniqueserv.' --remote +\%{line} \%{input}" ../main.pdf 2>/dev/null &')
 
