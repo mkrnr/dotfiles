@@ -1,0 +1,119 @@
+# i3blocks~/.config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+color=#4E9FB1
+separator_block_width=15
+
+# Generic media player support
+#
+# This displays "ARTIST - SONG" if a music is playing.
+# Supported players are: clementine, spotify, vlc, audacious,
+# xmms2, mplayer, and others.
+#
+#[mediaplayer]
+#instance=spotify
+#command=$SCRIPT_DIR/mediaplayer
+#interval=5
+#signal=10
+
+[volume]
+#label=VOL
+#label=音量
+#♩♪♫♬
+label=♪
+instance=Master
+#instance=PCM
+#command=$SCRIPT_DIR/volume
+command=amixer get Master | grep "Front Left:" | awk '{print $5}' | sed 's:^.\(.*\).$:\1:'
+#interval=once
+interval=1
+#signal=1
+
+#[download]
+#command=~/bandwidth.sh rx
+#min_width=0000 kB/s
+#align=right
+#color=#00FF00
+#interval=1 # IMPORTANT
+#
+#[upload]
+#command=~/bandwidth.sh tx
+#min_width=0000 kB/s
+#align=right
+#color=#FF0000
+#interval=1 # IMPORTANT
+
+[memory]
+#label=MEM
+#label=主存
+label=≣
+command=$SCRIPT_DIR/memory
+interval=1
+
+#[wireless]
+#label=W
+##instance=wlan0
+#instance=wlp3s0
+#command=$SCRIPT_DIR/network
+#color=#00FF00
+#interval=10
+
+#[ethernet]
+#label=E
+##instance=eth0
+#instance=enp0s25
+#command=$SCRIPT_DIR/network
+#color=#00FF00
+#interval=10
+
+[cpu]
+#label=CPU
+#label=用法
+label=℆
+command=$SCRIPT_DIR/cpu_usage
+#min_width=CPU: 100.00%
+interval=1
+
+[temp]
+#label=TEMP
+#label=温
+label=♨
+command=$SCRIPT_DIR/cpu_temperature
+interval=2
+
+#[load]
+#command=$SCRIPT_DIR/load_average
+#interval=10
+
+[battery]
+#label=电池
+label=⚡
+command=$SCRIPT_DIR/battery
+interval=30
+
+[time]
+#command=date '+%Y年%m月%d日 %H:%M:%S'
+#command=LANG=zh_CN.utf8 date '+%m月%d日 %a %H:%M'
+#command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%d.%m.%Y %H:%M:%S'
+interval=1
