@@ -1,5 +1,9 @@
 setlocal foldlevel=999
 
+
+" set spelling to en_us by default
+setlocal spell spelllang=en_us
+
 nmap <silent> <localleader>kd :Silent latexmk -pdf -cd %:t <CR>
 nmap <silent> <localleader>km :call LatexmkOnLatexmain()<CR>
 
@@ -42,7 +46,7 @@ let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -interaction=nonstopmode $*'
 " without the extension.
 " Using the filename, without the extension, not in uppercase though, but
 " that's okay for a servername, it automatically get uppercased
-let theuniqueserv = expand("%:r")
+let theuniqueserv = expand("%:t:r")
 
 " run vim appropriately
 let g:Tex_ViewRuleComplete_pdf = 'zathura -x "vim --servername '.theuniqueserv.' --remote +\%{line} \%{input}" $*.pdf 2>/dev/null &'
