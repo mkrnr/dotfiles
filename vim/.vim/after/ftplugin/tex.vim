@@ -4,28 +4,24 @@ setlocal foldlevel=999
 " set spelling to en_us by default
 setlocal spell spelllang=en_us
 
-nmap <silent> <localleader>kd :Silent latexmk -pdf -cd %:t <CR>
-nmap <silent> <localleader>km :call LatexmkOnLatexmain()<CR>
 
 function! LatexmkOnLatexmain()
   let latexmainFile=system('ls *.latexmain | tr "\n" " "')
   if !empty(matchstr(latexmainFile, '.*no matches found.*'))
     " no matching .latexmain found
-    echo "test"
     let currentdir=fnamemodify(getcwd(), ':t')
     " look in parent directory
     " TODO: search recusively thorugh parents?
     execute 'cd .. '
     let latexmainFile=system('ls *.latexmain | tr "\n" " "')
-    echo latexmainFile
     let mainFile=system("basename ".latexmainFile." .latexmain")
-    let execstr=':Silent latexmk -pdf -cd '.mainFile
+    let execstr=":Silent latexmk -pdflatex='pdflatex -file-line-error -synctex=1' -pdf ".mainFile
     execute execstr
     execute 'cd '.currentdir
   else
     " matching .latexmain found
     let mainFile=system("basename ".latexmainFile." .latexmain")
-    let execstr=':Silent latexmk -pdf -cd '.mainFile
+    let execstr=":Silent latexmk -pdflatex='pdflatex -file-line-error -synctex=1' -pdf ".mainFile
     execute execstr
   endif
 
@@ -51,19 +47,39 @@ let theuniqueserv = expand("%:t:r")
 " run vim appropriately
 let g:Tex_ViewRuleComplete_pdf = 'zathura -x "vim --servername '.theuniqueserv.' --remote +\%{line} \%{input}" $*.pdf 2>/dev/null &'
 
-
 " Forward search
 " syntax for zathura: zathura --synctex-forward 193:1:paper.tex paper.pdf
 function! SyncTexForward()
-        let execstr = 'silent! !zathura --synctex-forward '.line('.').':1:"'.expand('%').'" "'.expand("%:p:r").'".pdf'
-        execute execstr
+  let latexmainFile=system('ls *.latexmain')
+  let latexmainFile=substitute(latexmainFile, "\n", "" ,"")
+  if !empty(matchstr(latexmainFile, '.*no matches found.*'))
+    " no matching .latexmain found
+    let currentdir=fnamemodify(getcwd(), ':t')
+    " look in parent directory
+    " TODO: search recusively thorugh parents?
+    execute 'cd .. '
+    let latexmainFile=system('ls *.latexmain')
+    let latexmainFile=substitute(latexmainFile, "\n", "" ,"")
+    let mainFile=substitute(latexmainFile, ".latexmain", "" ,"")
+
+    let mainFileName=substitute(mainFile, ".tex", "" ,"")
+
+    let execstr = ':Silent zathura --synctex-forward '.line('.').':1:'.expand('%').' '.expand("%:p:h:h").'/'.mainFileName.'.pdf'
+    execute 'cd '.currentdir
+  else
+    " matching .latexmain found
+    let mainFile=substitute(latexmainFile, ".latexmain", "" ,"")
+
+    let mainFileName=substitute(mainFile, ".tex", "" ,"")
+
+    let execstr = ':Silent zathura --synctex-forward '.line('.').':1:'.expand('%').' '.expand("%:p:h:h").'/'.mainFileName.'.pdf'
+  endif
+  execute execstr
 endfunction
 
 " k=kompile (or kompilieren in German...)
-"nmap \k \ll
+nmap <silent> <localleader>k :call LatexmkOnLatexmain()<CR>
 
-"nmap \v \lv
+nmap <localleader>v <localleader>lv
 
-" TODO: make this work
-nmap \f :call SyncTexForward()<CR>
-
+nmap <localleader>f :call SyncTexForward()<CR>

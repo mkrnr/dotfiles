@@ -3,3 +3,6 @@ map o zoom out
 
 set recolor-darkcolor "#839496"
 set recolor-lightcolor "#002b36"
+set highlight-transparency 0.4
+set highlight-color "#268bd2"
+set highlight-active-color "#0019d2"
