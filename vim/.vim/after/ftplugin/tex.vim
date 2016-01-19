@@ -5,6 +5,26 @@ setlocal foldlevel=999
 setlocal spell spelllang=en_us
 
 
+
+" partly from: http://debdeep777.blogspot.de/2015/01/vim-texlive-vim-latex-suite-zathura-pdf.html
+"
+" Default compiling format
+let g:Tex_DefaultTargetFormat='pdf'
+
+" set the default viewer
+let g:Tex_ViewRule_pdf = 'zathura'
+
+" Trying to add same for pdfs, hoping that package SynTex is installed
+let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -interaction=nonstopmode $*'
+
+" Get the correct servername, which should be the filename of the tex file,
+" without the extension.
+" Using the filename, without the extension, not in uppercase though, but
+" that's okay for a servername, it automatically get uppercased
+let theuniqueserv = expand("%:t:r")
+" run vim appropriately
+let g:Tex_ViewRuleComplete_pdf = 'zathura -x "vim --servername '.theuniqueserv.' --remote +\%{line} \%{input}" $*.pdf 2>/dev/null &'
+
 function! LatexmkOnLatexmain()
   let latexmainFile=system('ls *.latexmain | tr "\n" " "')
   if !empty(matchstr(latexmainFile, '.*no matches found.*'))
@@ -24,28 +44,26 @@ function! LatexmkOnLatexmain()
     let execstr=":Silent latexmk -pdflatex='pdflatex -file-line-error -synctex=1' -pdf ".mainFile
     execute execstr
   endif
-
 endfunction
 
-" from: http://debdeep777.blogspot.de/2015/01/vim-texlive-vim-latex-suite-zathura-pdf.html
-"
-" Default compiling format
-let g:Tex_DefaultTargetFormat='pdf'
+function! RunZathura()
+  let theuniqueserv = expand("%:t:r")
+  let folders=expand("%:h")
+  if !empty(matchstr(folders, '\.'))
+    " no extra folders
+    execute "normal \\lv"
+  else
+    let theuniqueserv = expand("%:t:r")
+    execute "cd ".folders
+    execute system('zathura -x "vim --servername '.theuniqueserv.' --remote +\%{line} \%{input}" ../main.pdf 2>/dev/null &')
 
-" set the default viewer
-let g:Tex_ViewRule_pdf = 'zathura'
+    let returnDirs=system('echo '.folders.' | sed "s#[A-Za-z]*#..#g"')
 
-" Trying to add same for pdfs, hoping that package SynTex is installed
-let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -interaction=nonstopmode $*'
-
-" Get the correct servername, which should be the filename of the tex file,
-" without the extension.
-" Using the filename, without the extension, not in uppercase though, but
-" that's okay for a servername, it automatically get uppercased
-let theuniqueserv = expand("%:t:r")
-
-" run vim appropriately
-let g:Tex_ViewRuleComplete_pdf = 'zathura -x "vim --servername '.theuniqueserv.' --remote +\%{line} \%{input}" $*.pdf 2>/dev/null &'
+    execute "cd ".returnDirs
+  endif
+  echo theuniqueserv
+  "execute execstr
+endfunction
 
 " Forward search
 " syntax for zathura: zathura --synctex-forward 193:1:paper.tex paper.pdf
@@ -80,6 +98,6 @@ endfunction
 " k=kompile (or kompilieren in German...)
 nmap <silent> <localleader>k :call LatexmkOnLatexmain()<CR>
 
-nmap <localleader>v <localleader>lv
+nmap <localleader>v :call RunZathura()<CR>
 
 nmap <localleader>f :call SyncTexForward()<CR>
