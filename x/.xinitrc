@@ -39,7 +39,7 @@ autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
 # unclutter to remove mouse from screen when not used
-unclutter -idle 1 -noevents -grab &
+unclutter -idle 1 -noevents -grab -not Java &
 
 #start ibus-daemon
 
