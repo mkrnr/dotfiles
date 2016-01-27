@@ -38,8 +38,8 @@ eval $(gpg-agent --daemon) &
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
-# unclutter to remove mouse from screen when not used
-unclutter -idle 1 -noevents -grab -not Java &
+# unclutter-xfixes to remove mouse from screen when not used
+unclutter --timeout 1 &
 
 #start ibus-daemon
 
