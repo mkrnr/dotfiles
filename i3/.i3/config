@@ -207,6 +207,11 @@ bindsym $mod+ctrl+Shift+l move workspace to output right
 bindsym $mod+ctrl+Shift+Left move workspace to output left
 bindsym $mod+ctrl+Shift+Right move workspace to output right
 
+# start ganttproject
+
+bindsym $mod+p exec ganttproject ~/mt/gantt/masters-thesis.gan
+
+
 # scratchpad
 #bindsym $mod+p move scratchpad
 #bindsym $mod+o scratchpad show
@@ -275,13 +280,16 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # update
-bindsym $mod+Shift+u exec i3-sensible-terminal -e yaourt -Syua
+bindsym $mod+Shift+u exec i3-sensible-terminal -e pacaur -Syu
 # adjustable borders
 bindsym $mod+t border normal
-bindsym $mod+y border 1pixel
+bindsym $mod+y border pixel 1
 bindsym $mod+g border none
 # no borders by default
-new_window 1pixel
+new_window pixel 1
+
+# no borders if there is only one application on the workspace:
+#smart_gaps on
 
 # get back to former workspace
 #workspace_auto_back_and_forth yes
@@ -336,11 +344,11 @@ bar {
 }
 
 # decoration colours
-# class                  border               background           text                 indicator
-client.unfocused         $C_BASE_BROWN_BLACK  $C_BASE_BROWN_BLACK  $C_BASE_BROWN_GREEN  $C_GREEN
-client.focused           $C_BLUE              $C_BLUE              $C_BASE_BROWN_BLACK  $C_GREEN
-client.focused_inactive  $C_BASE_BROWN_GREEN  $C_BASE_BROWN_GREEN  $C_BASE_BROWN_BLACK  $C_GREEN
-client.urgent            $C_RED               $C_RED               $C_BASE_BROWN_BLUE   $C_GREEN
-client.background        $C_BASE_BROWN_BLACK
+# class                  border               background           text                 indicator child_border
+client.unfocused         $C_BASE_BROWN_BLACK  $C_BASE_BROWN_BLACK  $C_BASE_BROWN_GREEN  $C_GREEN  $C_BROWN_BLACK
+client.focused           $C_BLUE              $C_BLUE              $C_BASE_BROWN_BLACK  $C_GREEN  $C_BLUE
+client.focused_inactive  $C_BASE_BROWN_GREEN  $C_BASE_BROWN_GREEN  $C_BASE_BROWN_BLACK  $C_GREEN  $C_BASE_BROWN_GREEN
+client.urgent            $C_RED               $C_RED               $C_BASE_BROWN_BLUE   $C_GREEN  $C_RED
+client.background        $C_BASE_BROWN_BLACK                                                      $C_BASE_BROWN_BLACK
 
 
