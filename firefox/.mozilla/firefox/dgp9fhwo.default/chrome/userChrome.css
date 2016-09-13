@@ -1,6 +1,7 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 /* Remove space before first tab */
+/*
 .tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
     -moz-padding-end: 0 !important;
     -moz-padding-start: 0 !important;
@@ -20,9 +21,11 @@
     background: #586E75 !important;
     color: #002B36 !important;
 }
+*/
 
 /* Hide Australis tab styles */
 
+/*
 .tab-background-start,
 .tab-background-end {
   display: none !important;
@@ -32,6 +35,7 @@
 .tab-background-middle {
   background: transparent !important;
 }
+*/
 
 /**
 #TabsToolbar {
@@ -44,7 +48,9 @@
 }
 
 /* Remove tab separators */
+/*
 .tabbrowser-tab:not([selected]):not([afterselected-visible]):not([afterhovered]):not([first-visible-tab]):not(:hover)::before,
 #tabbrowser-tabs:not([overflow]) > .tabbrowser-tab[last-visible-tab]:not([selected]):not([beforehovered]):not(:hover)::after {
   background: none !important;
 }
+*/
