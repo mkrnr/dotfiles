@@ -88,9 +88,8 @@ bindsym $mod+Shift+Q kill
 
 bindsym $mod+Escape exec i3-sensible-terminal -e htop
 
-# start dmenu (a program launcher)
-
-bindsym $mod+d exec rofi -show run -bgalt '$C_BASE_BLACK'
+# start rofi (a program launcher)
+bindsym $mod+d       exec rofi -show run
 
 # change focus
 bindsym $mod+h focus left
@@ -208,8 +207,10 @@ bindsym $mod+ctrl+Shift+Left move workspace to output left
 bindsym $mod+ctrl+Shift+Right move workspace to output right
 
 # start ganttproject
-
 bindsym $mod+p exec ganttproject ~/mt/gantt/masters-thesis.gan
+bindsym $mod+o exec libreoffice ~/mt/planning/counts.ods
+
+
 
 
 # scratchpad
