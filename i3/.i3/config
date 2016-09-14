@@ -223,9 +223,9 @@ bindsym $mod+Shift+C reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart# exit i3 (logs you out of your X session)
-bindsym Mod1+ctrl+Delete exec sudo systemctl suspend
+bindsym Mod1+ctrl+Delete exec suspend
 # shutdown
-bindsym Mod1+ctrl+End exec sudo systemctl poweroff
+bindsym Mod1+ctrl+End exec poweroff
 # lock screen
 #bindsym Mod1+ctrl+l exec slimlock
 #bindsym Mod1+ctrl+s exec sleep 0.2 && xset dpms force off

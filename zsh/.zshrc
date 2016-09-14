@@ -31,7 +31,7 @@ export KEYTIMEOUT=1
 # Ctrl-R for reverse incremental search
 bindkey "^R" history-incremental-search-backward
 
-zstyle :compinstall filename '/home/martin/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 
 autoload -Uz compinit
