@@ -85,3 +85,14 @@ XTerm*borderWidth:  0
 ! Every shell is a login shell by default (for inclusion of all necessary environment variables)
 XTerm*loginshell: true
 XTerm*savelines: 40960
+
+! Rofi
+rofi.font: Roboto 9
+rofi.color-normal: S_base03,S_base0,S_base02,S_blue,S_base2
+!greyish highlight: rofi.color-normal: S_base03,S_base0,S_base02,S_base0,S_base02
+rofi.color-active: S_base03,S_cyan,S_base02,S_cyan,S_base2
+rofi.color-urgent: S_base03,S_orange,S_base02,S_orange,S_base2
+rofi.color-window: S_base03,S_base01
+rofi.separator-style: none
+rofi.modi: window,run,ssh,combi
+rofi.hide-scrollbar: true

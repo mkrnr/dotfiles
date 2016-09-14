@@ -4,6 +4,9 @@
 
 " vim config file
 
+" remove vi compaitibility
+set nocompatible
+
 " two spaces instead of tabs
 set expandtab
 set tabstop=2
@@ -189,3 +192,40 @@ command! -nargs=1 Silent
 
 " insert real tab with shift+tab
 noremap <S-Tab> <C-V><Tab>
+
+" used by vim-plug
+call plug#begin('~/.vim/plugged')
+  Plug 'scrooloose/syntastic'
+call plug#end()
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_python_exec = '/usr/bin/python2'
+
+
+"idea: B
+" macro for adding author tags
+"let @a='c<author></author>bbbhelp`['
+"let @f='c<firstName></firstName>bbpEEll'
+"let @l='c<lastName></lastName>bbpEEll'
+"let @m='c<middleName></middleName>bbpEEll'
+"let @p='c<prefix></prefix>bbpEEll'
+"let @t='c<firstAndMiddleName></firstAndMiddleName>bbpEEll'
+
+" TODO: remove this...
+"noremap <S-a> @a
+"noremap <S-f> @f
+"noremap <S-l> @l
+"noremap <S-m> @m
+"noremap <S-p> @p
+"noremap <S-t> @t
+"
+"noremap E el
+"autocmd FileType text set syntax=xml
+"set so=999

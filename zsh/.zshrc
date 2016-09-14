@@ -15,6 +15,9 @@ fi
 # for stu
 export MANPATH="$HOME/man:$MANPATH"
 
+# for gem
+export PATH="$HOME/.gem/ruby/2.3.0/bin:$PATH"
+
 HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
@@ -205,3 +208,8 @@ export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 ibus-daemon -drx
 
+export PYTHONPATH=${PYTHONPATH}:${HOME}/ownCloud/workspace/wikiwhere:/srv/http/wikiwhere-demo
+
+export QT_STYLE_OVERRIDE=GTK+
+
+export MAVEN_OPTS="-Xmx6G"

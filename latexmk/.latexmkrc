@@ -1,6 +1,12 @@
 add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');
 
+#TODO find a cleaner solution
+add_cus_dep('mathematics-glo', 'mathematics-gls', 0, 'run_makeglossaries');
+add_cus_dep('probability-theory-glo', 'probability-theory-gls', 0, 'run_makeglossaries');
+add_cus_dep('graphical-models-glo', 'graphical-models-gls', 0, 'run_makeglossaries');
+add_cus_dep('graph-theory-glo', 'graph-theory-gls', 0, 'run_makeglossaries');
+
 sub run_makeglossaries {
   if ( $silent ) {
     system "makeglossaries -q '$_[0]'";

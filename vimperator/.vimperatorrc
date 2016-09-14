@@ -11,6 +11,8 @@ nnoremap K gt
 " hide search bar
 set gui="nonavigation,nobookmarks,nomenu"
 
+set status="input,location,bookmark,history,tabcount,position,ssl"
+
 colorscheme solarized_dark
 
 " incognito like Chromium
