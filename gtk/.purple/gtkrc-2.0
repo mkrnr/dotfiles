@@ -3,7 +3,7 @@
 # write the settings again.
 # The FAQ (http://developer.pidgin.im/wiki/FAQ) contains some further examples
 # of possible pidgin gtkrc settings.
-gtk-font-name = "Roboto 8"
+gtk-font-name = "Roboto 12" #8
 style "purplerc_style"
 {
 	GtkIMHtml::hyperlink-color = "#3890EE"
@@ -15,6 +15,6 @@ style "purplerc_style"
 widget_class "*" style "purplerc_style"
 style "*pidgin_conv_entry_style"
 {
-	font_name = "Source Code Pro 9"
+	font_name = "Source Code Pro 12" #9
 }
 widget "*pidgin_conv_entry" style "*pidgin_conv_entry_style"
