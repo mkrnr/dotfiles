@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-temp="$(sensors coretemp-isa-0000 | awk '/Physical id 0/ { print $4 }' | sed 's/.//' | sed 's/.\{4\}$//')"
+temp="$(sensors coretemp-isa-0000 | awk '/Package id 0/ { print $4 }' | sed 's/.//' | sed 's/.\{4\}$//')"
 
 echo "$temp°C"
 echo "$temp°C"
