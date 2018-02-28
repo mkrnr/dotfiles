@@ -1,7 +1,0 @@
-! ensure that altgr is loaded:
-keycode 108=ISO_Level3_Shift
-! dots and dash:
-!keycode 60 = period greater period greater ellipsis
-!!keycode 61 = slash question slash question emdash
-clear Lock
-keycode 66 = Escape NoSymbol Escape
