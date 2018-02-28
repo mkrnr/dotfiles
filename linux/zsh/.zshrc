@@ -1,22 +1,11 @@
-# This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
-# More information: http://creativecommons.org/licenses/by-sa/3.0/
-#
 # Author: Martin Koerner <http://mkoerner.de/>
 
 # zsh config file
-
-
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-
-# for stu
-export MANPATH="$HOME/man:$MANPATH"
-
-# for gem
-export PATH="$HOME/.gem/ruby/2.3.0/bin:$PATH"
 
 HISTFILE=~/.histfile
 HISTSIZE=5000
@@ -28,15 +17,10 @@ export TERM='xterm-256color'
 
 export KEYTIMEOUT=1
 
-# Ctrl-R for reverse incremental search
-bindkey "^R" history-incremental-search-backward
-
 zstyle :compinstall filename "$HOME/.zshrc"
-
 
 autoload -Uz compinit
 compinit
-
 
 autoload -U colors && colors
 
@@ -48,9 +32,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # use the same colors as ls for completion
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# promt
-PS1="%{$fg[green]%}%n@arch%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%% "
 
 export VISUAL="vim"
 
@@ -75,35 +56,7 @@ extract () {
   fi
 }
 
-# open a file using the default editor
-o () {
-  if [ -z "$1" ] ; then
-      echo "No argument supplied"
-  else
-    if [ -f $1 ] ; then
-      xdg-open $1 &!
-    else
-      echo "'$1' is not a valid file"
-    fi
-  fi
-}
-
-# open a file using the default editor and close the terminal
-oe () {
-  if [ -z "$1" ] ; then
-      echo "No argument supplied"
-  else
-    if [ -f $1 ] ; then
-      xdg-open $1 &!
-      exit 1
-    else
-      echo "'$1' is not a valid file"
-    fi
-  fi
-}
-
-
-# from Jerome Kunegis
+# from Jérôme Kunegis
 git() {
     if [ $# -eq 0 ] ; then
         git log --oneline origin/master..HEAD && git status -s
@@ -167,20 +120,6 @@ vi_mode_indicator () {
   esac
 }
 
-# run vtex from ./vim/bin/vtex
-# open a file using the default editor
-vtex () {
-  if [ -z "$1" ] ; then
-      echo "No argument supplied"
-  else
-    if [ -f $1 ] ; then
-      ~/.vim/bin/vtex $1
-    else
-      echo "'$1' is not a valid file"
-    fi
-  fi
-}
-
 
 # Reset mode-marker and prompt whenever the keymap changes
 function zle-line-init zle-keymap-select {
@@ -201,15 +140,5 @@ zle -N zle-keymap-select
 #precmd () print -rP "${user_host} ${current_dir}"
 
 local return_code="%(?..[%{$fg[red]%}%?%{$reset_color%}] )"
-PS1='${return_code}%{$fg[green]%}%n@arch%{$reset_color%}${vi_mode}:%{$fg[blue]%}%~%{$reset_color%}%% '
+PS1='${return_code}%{$fg[green]%}%n@wsl%{$reset_color%}${vi_mode}:%{$fg[blue]%}%~%{$reset_color%}%% '
 
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-ibus-daemon -drx
-
-export PYTHONPATH=${PYTHONPATH}:${HOME}/ownCloud/workspace/wikiwhere:/srv/http/wikiwhere-demo
-
-export QT_STYLE_OVERRIDE=GTK+
-
-export MAVEN_OPTS="-Xmx6G"
