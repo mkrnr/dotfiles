@@ -4,6 +4,18 @@ if [ $PWD = "/mnt/c/source/windows-terminal/home" ] ; then
     cd ~
 fi
 
+updateTerminalTitle() {
+    cleanPath=$PWD
+    cleanPath="${cleanPath/$HOME/~}"
+    cleanPath="${cleanPath/\/mnt\//}"
+    echo -ne "\e]0;$cleanPath\a"
+}
+
+updateTerminalTitle
+chpwd() {
+    updateTerminalTitle
+}
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
