@@ -1,11 +1,15 @@
 # Author: Martin Koerner <http://mkoerner.de/>
 
-# zsh config file
+if [ $PWD = "/mnt/c/source/windows-terminal/home" ] ; then
+    cd ~
+fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+unsetopt beep
 
 HISTFILE=~/.histfile
 HISTSIZE=5000
@@ -64,6 +68,9 @@ git() {
         command git "$@"
     fi
 }
+
+
+alias journal='~/journal/journal.sh'
 
 # ls coloring
 if [[ -x "`whence -p dircolors`" ]]; then
@@ -140,5 +147,19 @@ zle -N zle-keymap-select
 #precmd () print -rP "${user_host} ${current_dir}"
 
 local return_code="%(?..[%{$fg[red]%}%?%{$reset_color%}] )"
-PS1='${return_code}%{$fg[green]%}%n@wsl%{$reset_color%}${vi_mode}:%{$fg[blue]%}%~%{$reset_color%}%% '
+PS1='${return_code}%{$fg[white]%}%n@wsl%{$reset_color%}${vi_mode}:%{$fg[white]%}%~%{$reset_color%}%% '
 
+# WSL (Windows Subsystem for Linux) specific config
+if [[ -f /proc/version ]] && grep -q "Microsoft" /proc/version; then
+
+  # Enable access to VcXSrv/Xming.
+  # export DISPLAY=":0.0"
+
+  # Fix umask value if WSL didn't set it properly.
+  # https://github.com/Microsoft/WSL/issues/352
+  [[ "$(umask)" == "000" ]] && umask 022
+
+  # Don't change priority of background processes with nice.
+  # https://github.com/Microsoft/WSL/issues/1887
+  unsetopt BG_NICE
+fi

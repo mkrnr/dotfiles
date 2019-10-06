@@ -6,6 +6,7 @@ schtasks /run /tn "enableLock"
 
 timeout /t 3 /nobreak
 
+
 $PowerState = [System.Windows.Forms.PowerState]::Suspend;
 $Force = $false;
 $DisableWake = $false;

@@ -12,9 +12,12 @@ set encoding=utf-8
 
 " two spaces instead of tabs
 set expandtab
-set tabstop=2
-set shiftwidth=2
+set tabstop=14
+set shiftwidth=14
 retab
+
+"TODO REMOVE:
+"set nowrap
 
 set noshowmode
 
@@ -34,11 +37,6 @@ set nu
 set ignorecase
 set infercase
 
-
-" Octave syntax
-"augroup filetypedetect
-"  au! BufRead,BufNewFile *.m,*.oct set filetype=octave
-"augroup END
 
 " highlighted search
 set nohlsearch
@@ -123,7 +121,7 @@ map <M->> <C-W>>
 
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_MultipleCompileFormats='dvi,ps,pdf'
-set clipboard=unnamed
+"set clipboard=unnamed
 
 set wildmode=longest,list,full
 set wildmenu
@@ -194,7 +192,8 @@ noremap <S-Tab> <C-V><Tab>
 " used by vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
    Plug 'scrooloose/nerdtree'
-   Plug 'joshdick/onedark.vim'
+   Plug 'lucasprag/simpleblack'
+   Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
 
@@ -285,7 +284,7 @@ let g:ale_linters = {
 let g:SimpylFold_docstring_preview=1
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='onedark'
+let g:airline_theme='simpleblack'
 
 "Credit joshdick
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -311,7 +310,7 @@ syntax enable
 "set background=dark " for the dark version
 "colorscheme one
 syntax on
-colorscheme onedark
+colorscheme simpleblack
 
 "TODO fix this
 "autocmd FileType python call deoplete#enable()
@@ -394,4 +393,27 @@ nnoremap <A-l> <C-w>l
 
 let @t="G:put =strftime('%FT%T%z')A,"
 noremap <A-t> @t
+
+"function by xolox (https://stackoverflow.com/a/6271254), released to public domain
+function! s:GetVisualSelection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - 2]
+    let lines[0] = lines[0][column_start - 1:]
+    return lines
+endfunction
+
+function SelectedToClipboard()
+    let s:selection = s:GetVisualSelection()
+    let s:tmpFile = '/mnt/c/tmp/tmp.txt'
+
+    call writefile(s:selection, s:tmpFile)
+    execute "AsyncRun cat '".s:tmpFile. "' | /mnt/c/Windows/System32/clip.exe"
+endfunction
+
+noremap <silent> "+y :call SelectedToClipboard()<cr>
 
