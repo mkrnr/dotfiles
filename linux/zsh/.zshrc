@@ -21,6 +21,12 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+export MYVIMRC="$HOME/.config/nvim/init.vim"
+
 unsetopt beep
 
 HISTFILE=~/.histfile
@@ -175,3 +181,5 @@ if [[ -f /proc/version ]] && grep -q "Microsoft" /proc/version; then
   # https://github.com/Microsoft/WSL/issues/1887
   unsetopt BG_NICE
 fi
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

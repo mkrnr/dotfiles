@@ -194,6 +194,8 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'scrooloose/nerdtree'
    Plug 'lucasprag/simpleblack'
    Plug 'skywind3000/asyncrun.vim'
+   Plug 'dhruvasagar/vim-table-mode'
+   Plug 'mkitt/tabline.vim'
 call plug#end()
 
 
@@ -407,7 +409,7 @@ function! s:GetVisualSelection()
     return lines
 endfunction
 
-function SelectedToClipboard()
+function! SelectedToClipboard()
     let s:selection = s:GetVisualSelection()
     let s:tmpFile = '/mnt/c/tmp/tmp.txt'
 
@@ -417,3 +419,29 @@ endfunction
 
 noremap <silent> "+y :call SelectedToClipboard()<cr>
 
+
+" rebinding Ctrl+number is not possible so I rebind Alt+1 and map Ctrl+number
+" to Alt+number in Autohotkey
+inoremap <A-1> <C-O>1gt
+inoremap <A-2> <C-O>2gt
+inoremap <A-3> <C-O>3gt
+inoremap <A-4> <C-O>4gt
+inoremap <A-5> <C-O>5gt
+inoremap <A-6> <C-O>6gt
+inoremap <A-7> <C-O>7gt
+inoremap <A-8> <C-O>8gt
+inoremap <A-9> <C-O>9gt
+inoremap <A-0> <C-O>10gt
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
+nnoremap <A-0> 10gt
+
+
+noremap <F5> :TableModeRealign<CR>:w<CR>

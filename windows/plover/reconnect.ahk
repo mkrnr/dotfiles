@@ -1,7 +1,7 @@
 CoordMode, Mouse, Screen
 
-click, right, 1790, 10
-click, 1790, 40
+click, right, 2430, 10
+click, 2430, 40
 
-MouseMove, 960, 540
+MouseMove, 1280, 720
 
