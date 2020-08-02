@@ -234,7 +234,7 @@ call plug#end()
 "   call dein#add('edkolev/promptline.vim')
 "   "call dein#add('tpope/vim-surround')
 "   "call dein#add('junegunn/fzf')
-" 
+"
 "   "call dein#add('ervandew/supertab')
 "  "TODO: airblade/vim-rooter
 " " exit dein
@@ -286,7 +286,7 @@ let g:ale_linters = {
 let g:SimpylFold_docstring_preview=1
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='simpleblack'
+"let g:airline_theme='simpleblack'
 
 "Credit joshdick
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -313,6 +313,8 @@ syntax enable
 "colorscheme one
 syntax on
 colorscheme simpleblack
+
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 "TODO fix this
 "autocmd FileType python call deoplete#enable()
@@ -445,3 +447,11 @@ nnoremap <A-0> 10gt
 
 
 noremap <F5> :TableModeRealign<CR>:w<CR>
+
+map <C-Space> <Nop>
+imap <C-Space> <Nop>
+vmap <C-Space> <Nop>
+smap <C-Space> <Nop>
+cmap <C-Space> <Nop>
+omap <C-Space> <Nop>
+

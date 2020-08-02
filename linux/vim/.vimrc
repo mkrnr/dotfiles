@@ -4,16 +4,26 @@
 
 " vim config file
 
-" remove vi compaitibility
 set nocompatible
+
+set nofoldenable    " disable folding
+
+set encoding=utf-8
 
 " two spaces instead of tabs
 set expandtab
-set tabstop=2
-set shiftwidth=2
+set tabstop=14
+set shiftwidth=14
 retab
 
-" automatically change workinf directory
+"TODO REMOVE:
+"set nowrap
+
+set noshowmode
+
+"set relativenumber number
+
+" automatically change working directory
 " (causes problems with citation completion in vim-latexsuite)
 " set autochdir
 " alternatively:
@@ -22,18 +32,11 @@ retab
 " show linenumbers
 set nu
 
-" syntax highlighting
-syntax enable
 
 " for autocompletion
 set ignorecase
 set infercase
 
-
-" Octave syntax
-"augroup filetypedetect
-"  au! BufRead,BufNewFile *.m,*.oct set filetype=octave
-"augroup END
 
 " highlighted search
 set nohlsearch
@@ -43,9 +46,6 @@ set mouse=a
 
 " incremental search
 set incsearch
-
-" Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Show matching [] and {}
 set showmatch
@@ -72,31 +72,30 @@ command! W w !sudo tee % > /dev/null
 noremap <silent> j gj
 noremap <silent> k gk
 
+map <silent> <DOWN> gj
+map <silent> <UP> gk
 
-" LaTeX REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-filetype plugin on
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-" OPTIONAL: This enables automatic indentation as you type.
-" TODO: enable indent when problem with markdown indentation (list items get indented too much) is solved
-" filetype indent on
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
-let g:Tex_CompileRule_dvi = 'latex -interaction=nonstopmode -file-line-error-style $*'
-let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode -file-line-error-style $*'
-let g:Tex_ViewRule_pdf = 'zathura -l error'
-let g:Tex_ViewRule_ps = 'zathura -l error'
+noremap H ^
+noremap L g_
+noremap J 5j
+noremap K 5k
 
-" silent compiling of latex documents
- nmap <Leader>lv :silent call Tex_RunLaTeX()<CR>
 
-" stop vim-latex macros
-" let g:Imap_FreezeImap=1
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
 
+
+"fun! StripTrailingWhitespace()
+"    " Don't strip on these filetypes
+"    if &ft =~ 'pandoc'
+"        return
+"    endif
+"    %s/\s\+$//e
+"endfun
+
+"autocmd BufWritePre * call StripTrailingWhitespace()
 
 " move through windows with ALT and arrows
 noremap <silent> <A-Down> :wincmd h<CR>
@@ -122,22 +121,24 @@ map <M->> <C-W>>
 
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_MultipleCompileFormats='dvi,ps,pdf'
-set clipboard=unnamedplus
+"set clipboard=unnamed
 
 set wildmode=longest,list,full
 set wildmenu
 
 " learn it the hard way
-noremap <Left>  <NOP>
-noremap <Right> <NOP>
-noremap <Up>    <NOP>
-noremap <Down>  <NOP>
+"noremap <Left>  <NOP>
+"noremap <Right> <NOP>
+"noremap <Up>    <NOP>
+"noremap <Down>  <NOP>
 
 " move tab
 noremap M :tabm<Space>
 " open tab
 noremap <C-t> :tabedit<Space>
 
+" Enable folding with the spacebar
+nnoremap <space> za
 
 " source $MYVIMRC reloads the saved $MYVIMRC
 nmap <Leader>s :source $MYVIMRC<CR>
@@ -163,16 +164,12 @@ set virtualedit=block
 " au BufWinLeave * mkview
 " au BufWinEnter * silent loadview
 
-" enable solarized theme
-set background=dark
-colorscheme solarized
 
-" set tab size for markdown files since 4 spaces are needed in markdown lists
-autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
 
 " settings for vim-markdown plugin
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_math=1
+"autocmd BufNewFile,BufRead *.md filetype plugin indent off
 
 
 " settings for vim-pandoc
@@ -181,7 +178,6 @@ let g:pandoc#modules#disabled=["folding"]
 
 " disable default mappings to allow \ll to be specified
 let g:pandoc#keyboard#use_default_mappings=0
-
 
 " fix redraw problem of vim when using silent (from:
 " http://vim.wikia.com/wiki/Avoiding_the_"Hit_ENTER_to_continue"_prompts)
@@ -194,38 +190,277 @@ command! -nargs=1 Silent
 noremap <S-Tab> <C-V><Tab>
 
 " used by vim-plug
-call plug#begin('~/.vim/plugged')
-  Plug 'scrooloose/syntastic'
+call plug#begin('~/.local/share/nvim/plugged')
+   Plug 'scrooloose/nerdtree'
+   Plug 'lucasprag/simpleblack'
+   Plug 'skywind3000/asyncrun.vim'
+   Plug 'dhruvasagar/vim-table-mode'
+   Plug 'mkitt/tabline.vim'
 call plug#end()
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_python_exec = '/usr/bin/python2'
-
-
-"idea: B
-" macro for adding author tags
-"let @a='c<author></author>bbbhelp`['
-"let @f='c<firstName></firstName>bbpEEll'
-"let @l='c<lastName></lastName>bbpEEll'
-"let @m='c<middleName></middleName>bbpEEll'
-"let @p='c<prefix></prefix>bbpEEll'
-"let @t='c<firstAndMiddleName></firstAndMiddleName>bbpEEll'
-
-" TODO: remove this...
-"noremap <S-a> @a
-"noremap <S-f> @f
-"noremap <S-l> @l
-"noremap <S-m> @m
-"noremap <S-p> @p
-"noremap <S-t> @t
+" if &compatible
+"   set nocompatible
+" endif
+" filetype off
+" " append to runtime path
+" set rtp+=/usr/share/vim/vimfiles
+" " initialize dein, plugins are installed to this directory
+" call dein#begin(expand('~/.config/nvim/plugged'))
+" " add packages here, e.g:
+" call dein#add('qwelyt/TrippingRobot')
+"   call dein#add('w0rp/ale')
+"   call dein#add('Chiel92/vim-autoformat')
+"   call dein#add('vim-scripts/indentpython.vim')
+"   call dein#add('joshdick/onedark.vim')
+"   "call dein#add('nvie/vim-flake8')
+"   "call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+"   call dein#add('Shougo/deoplete.nvim',{'on_ft': ['python']})
+"   call dein#add('Shougo/echodoc.vim')
+"   call dein#add('Shougo/neosnippet.vim')
+"   call dein#add('zchee/deoplete-jedi')
+"   "call dein#add('davidhalter/jedi-vim')
+"   call dein#add('scrooloose/nerdtree')
+"   call dein#add('jistr/vim-nerdtree-tabs')
+"   call dein#add('kien/ctrlp.vim')
+"   call dein#add('tpope/vim-fugitive')
+"   call dein#add('airblade/vim-gitgutter')
+"   call dein#add('Xuyuanp/nerdtree-git-plugin')
+"   call dein#add('vim-airline/vim-airline')
+"   call dein#add('vim-airline/vim-airline-themes')
+"   call dein#add('rakr/vim-one')
+"   call dein#add('vim-pandoc/vim-pandoc')
+"   call dein#add('vim-pandoc/vim-pandoc-syntax')
+"   call dein#add('edkolev/promptline.vim')
+"   "call dein#add('tpope/vim-surround')
+"   "call dein#add('junegunn/fzf')
 "
-"noremap E el
-"autocmd FileType text set syntax=xml
-"set so=999
+"   "call dein#add('ervandew/supertab')
+"  "TODO: airblade/vim-rooter
+" " exit dein
+" call dein#end()
+" " auto-install missing packages on startup
+" if dein#check_install()
+"   call dein#install()
+" endif
+
+
+filetype plugin on
+
+
+let g:jedi#completions_enabled = 0
+"let g:deoplete#enable_at_startup = 1
+"call deoplete#custom#set('_', 'converters', ['converter_auto_paren','converter_auto_delimiter'])
+"
+"let g:deoplete#auto_completion_start_length=1
+"let g:deoplete#sources#jedi#server_timeout = 100
+"
+"let g:deoplete#sources#jedi#python_path = '/usr/bin/python'
+
+
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_sign_column_always = 1
+
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_linters = {
+\   'python': ['flake8','pylint'],
+\}
+
+"let g:deoplete#enable_at_startup = 1
+
+" stop vim-latex macros
+" let g:Imap_FreezeImap=1
+
+
+let g:SimpylFold_docstring_preview=1
+
+let g:airline_powerline_fonts = 1
+"let g:airline_theme='simpleblack'
+
+"Credit joshdick
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+" syntax highlighting
+syntax enable
+
+
+"set background=dark " for the dark version
+"colorscheme one
+syntax on
+colorscheme simpleblack
+
+"TODO fix this
+"autocmd FileType python call deoplete#enable()
+"let g:deoplete#enable_at_startup = 1
+"autocmd FileType tex :setlocal spell
+"au FileType python call deoplete#custom#set('_', 'converters', ['converter_auto_paren','converter_auto_delimiter'])
+"
+
+"if !exists('g:deoplete#omni#input_patterns')
+"  let g:deoplete#omni#input_patterns = {}
+"endif
+"" let g:deoplete#disable_auto_complete = 1
+"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+"
+"augroup omnifuncs
+"  autocmd!
+"  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"augroup end
+
+
+
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+
+
+
+" Python config (TODO: move to proper files)
+
+"au BufNewFile,BufRead *.py
+"    \ set tabstop=4
+"    \ set softtabstop=4
+"    \ set shiftwidth=4
+"    \ set textwidth=79
+"    \ set expandtab
+"    \ set autoindent
+"    \ set fileformat=unix
+"
+
+"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+""python with virtualenv support
+"py << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"  project_base_dir = os.environ['VIRTUAL_ENV']
+"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"  execfile(activate_this, dict(__file__=activate_this))
+"EOF
+
+
+
+" set tab size for markdown files since 4 spaces are needed in markdown lists
+autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
+
+" Remember cursor position between vim sessions
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \   exe "normal! g'\"" |
+            \ endif
+            " center buffer around cursor when opening files
+autocmd BufRead * normal zz
+
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+let @t="G:put =strftime('%FT%T%z')A,"
+noremap <A-t> @t
+
+"function by xolox (https://stackoverflow.com/a/6271254), released to public domain
+function! s:GetVisualSelection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - 2]
+    let lines[0] = lines[0][column_start - 1:]
+    return lines
+endfunction
+
+function! SelectedToClipboard()
+    let s:selection = s:GetVisualSelection()
+    let s:tmpFile = '/mnt/c/tmp/tmp.txt'
+
+    call writefile(s:selection, s:tmpFile)
+    execute "AsyncRun cat '".s:tmpFile. "' | /mnt/c/Windows/System32/clip.exe"
+endfunction
+
+noremap <silent> "+y :call SelectedToClipboard()<cr>
+
+
+" rebinding Ctrl+number is not possible so I rebind Alt+1 and map Ctrl+number
+" to Alt+number in Autohotkey
+
+
+inoremap <F1> <C-O>1gt
+inoremap <F2> <C-O>2gt
+inoremap <F3> <C-O>3gt
+inoremap <F4> <C-O>4gt
+inoremap <F5> <C-O>5gt
+inoremap <F6> <C-O>6gt
+inoremap <F7> <C-O>7gt
+inoremap <F8> <C-O>8gt
+inoremap <F9> <C-O>9gt
+inoremap <F10> <C-O>10gt
+nnoremap <F1> 1gt
+nnoremap <F2> 2gt
+nnoremap <F3> 3gt
+nnoremap <F4> 4gt
+nnoremap <F5> 5gt
+nnoremap <F6> 6gt
+nnoremap <F7> 7gt
+nnoremap <F8> 8gt
+nnoremap <F9> 9gt
+nnoremap <F10> 10gt
+
+
+noremap <F11> :TableModeRealign<CR>:w<CR>
+
+
+map <nul> <Nop>
+imap <nul> <Nop>
+vmap <nul> <Nop>
+smap <nul> <Nop>
+cmap <nul> <Nop>
+omap <nul> <Nop>
+
+"let &t_SI = "\<esc>[5 q"  " blinking I-beam in insert mode
+"let &t_SR = "\<esc>[1 q"  " blinking underline in replace mode
+"let &t_EI = "\<esc>[ q"  " default cursor (usually blinking block) otherwise
+
+au VimEnter,InsertLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+au VimLeave,InsertEnter * silent execute '!echo -ne "\e[5 q"' | redraw!
+
+

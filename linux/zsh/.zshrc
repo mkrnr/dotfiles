@@ -30,8 +30,8 @@ export MYVIMRC="$HOME/.config/nvim/init.vim"
 unsetopt beep
 
 HISTFILE=~/.histfile
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=10000
+SAVEHIST=10000
 setopt appendhistory autocd extendedglob
 bindkey -v
 
@@ -113,8 +113,8 @@ zle -N zle-keymap-select
 #alias cp='cp -i'
 
 # set vim as the default editor
-export VISUAL=vim
-export EDITOR="vim"
+export VISUAL=nvim
+export EDITOR="nvim"
 
 # path for bc config file
 export BC_ENV_ARGS=~/.bcrc
@@ -171,7 +171,7 @@ PS1='${return_code}%{$fg[white]%}%n@wsl%{$reset_color%}${vi_mode}:%{$fg[white]%}
 if [[ -f /proc/version ]] && grep -q "Microsoft" /proc/version; then
 
   # Enable access to VcXSrv/Xming.
-  # export DISPLAY=":0.0"
+  #export DISPLAY=":0.0"
 
   # Fix umask value if WSL didn't set it properly.
   # https://github.com/Microsoft/WSL/issues/352
@@ -181,5 +181,12 @@ if [[ -f /proc/version ]] && grep -q "Microsoft" /proc/version; then
   # https://github.com/Microsoft/WSL/issues/1887
   unsetopt BG_NICE
 fi
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
+
+alias vim="nvim"
+alias vi="nvim"
+alias oldvim="vim"
+
+ZLE_RPROMPT_INDENT=0
